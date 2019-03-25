@@ -10,7 +10,6 @@
     "test": "mocha --exit",
     "cover": "nyc --reporter=lcov --reporter=text-summary npm run mocha",
     "heroku": "node index.js"
-    
   },
   "repository": {
     "type": "git"
@@ -24,9 +23,10 @@
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.16.3",
-    "mongodb": "^3.1.13",
+    "mongodb": "^3.2.2",
     "mongoose": "^5.4.19",
     "morgan": "^1.9.1",
+    "npm-check-updates": "^3.1.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
