@@ -1,0 +1,135 @@
+*{
+  font-family: 'Poppins', sans-serif;
+}
+.header-bar{
+  text-align: center;
+}
+
+.title{
+  background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+  background: -o-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -o-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+  background: -moz-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -moz-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+  background: linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+  color: white;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+
+.home{
+  width: 50%;
+  background-color: white;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.description{
+  margin-top: 0;
+}
+
+h2{
+  margin-top: 0;
+}
+
+body{
+  background: url('../images/beer4.jpg') ; 
+  background-color: rgba(255, 255, 255, 0.3);
+  background-blend-mode: lighten;
+  
+}
+.dashboard{
+  width: 50%;
+  margin: auto;
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 5%;
+  color: black;
+}
+
+.container{
+	height: 100vh;
+	background-color: #111;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap}
+  
+.card{
+    width: 50%;
+		height: 300px;
+		background-color: black;
+		color: #fff;
+		box-sizing: border-box;
+		padding: 40px;
+		border-radius: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+  };
+	.line{
+      width: 320px;
+			height: 5px;
+      margin-top: 10px;
+    }
+	.card-text{
+			margin-top: 15px;
+			font-size: 15px;
+			line-height: 1.6;
+			color: white;
+    }
+
+.user-input{
+  display: inline-block;
+}
+
+.dashboard-username-main{
+  /* border-bottom: 1px solid black; */
+  padding-bottom: 3px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  background-color: #ffc608;
+}
+
+.dashboard-welcome{
+  margin-top: 0;
+  padding-top: 7px;
+}
+
+.dashboard-username{
+  color: white;
+  border-radius: 5px;
+  border-bottom: 1px solid black;
+  margin-bottom: 5px;
+  background-color: #dd0000;
+}
+
+button{
+ margin: 10px; 
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+h2, h3{
+  font-weight: normal;
+}
+
+@media(max-width: 900px){
+  .dashboard{
+    width: 95%
+  }
+  .card{
+    width: 75%;
+    margin-top: 15px;
+}
+}
