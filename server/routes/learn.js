@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Word = require('../models/word');
+const List = require('../models/list');
 const passport = require('passport');
 
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
@@ -10,12 +12,16 @@ router.use('/', passport.authenticate('jwt', { session: false, failWithError: tr
 router.get('/', (req, res, next) => {
   const userId = req.user.id;
   //get user document
-  return User.findOne({ _id: userId })
-    .then((user) => {
-    //  use head value to return word at the address indicated by head
-      let index = user.head;
-      const word = user.words[index];
-      res.json(word);
+  return List.findOne({ userId: userId, learning: 'german' })
+    .then((userList) => {
+      //  use head value to return word at the address indicated by head
+      let index = userList.head;
+      const wordId = userId[index].wordId;
+      return Word.findOne({ _id: wordId });
+
+    })
+    .then((word) => {
+      return res.json(word);
     })
     .catch(err => next(err));
 });
