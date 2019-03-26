@@ -11,17 +11,18 @@ router.use('/', passport.authenticate('jwt', { session: false, failWithError: tr
 
 router.get('/', (req, res, next) => {
   const userId = req.user.id;
-  //get user document
   return List.findOne({ userId: userId, learning: 'german' })
     .then((userList) => {
-      //  use head value to return word at the address indicated by head
       let index = userList.head;
-      const wordId = userId[index].wordId;
+      const wordId = userList.words[index].wordId;
       return Word.findOne({ _id: wordId });
-
     })
     .then((word) => {
-      return res.json(word);
+      const wordToLearn = {
+        germanWord: word.germanWord,
+        mValue: word.mValue
+      };
+      return res.json(wordToLearn);
     })
     .catch(err => next(err));
 });

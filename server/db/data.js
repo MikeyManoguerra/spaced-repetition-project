@@ -70,7 +70,7 @@ const words = [
     'germanWord': 'taxi',
     'englishWord': 'taxi',
     'mValue': 1,
-    'pointer': null
+    'pointer': 10
   },
   {
     '_id': '111111111111111111111111',
@@ -140,7 +140,7 @@ const words = [
     'germanWord': 'bist du Single?',
     'englishWord': 'are you single?',
     'mValue': 1,
-    'pointer': 20
+    'pointer': null
   }
 
 ];

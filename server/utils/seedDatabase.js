@@ -27,9 +27,10 @@ mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true })
     ]);
   })
   .then(([users, words]) => {
+    console.log(words)
     const wordsList = words.map(word => {
       let item = {};
-      item.wordId = words._id;
+      item.wordId = word._id;
       item.mValue = word.mValue;
       item.pointer = word.pointer;
       return item;
