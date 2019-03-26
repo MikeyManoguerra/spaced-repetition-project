@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const { DATABASE_URL } = require('../config');
 const Word = require('../models/word');
 const User = require('../models/user');
+const List = require('../models/list');
 
 
 const { words, users } = require('../db/data');
@@ -14,24 +15,35 @@ const { words, users } = require('../db/data');
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => mongoose.connection.db.dropDatabase())
   .then(() => {
-    return Word.insertMany(words);
+    return Promise.all([
+      Word.insertMany(words),
+      User.insertMany(users)
+    ]);
   })
-  .then(() => Word.find())
-  .then(words => {
+  .then(() => {
+    return Promise.all([
+      User.find(),
+      Word.find()
+    ]);
+  })
+  .then(([users, words]) => {
     const wordsList = words.map(word => {
       let item = {};
-      item.germanWord = word.germanWord;
-      item.englishWord = word.englishWord;
+      item.wordId = words._id;
       item.mValue = word.mValue;
       item.pointer = word.pointer;
       return item;
     });
-    const newUsers = users.map(user => {
-      return Object.assign({}, user, {
-        words: [...wordsList]
-      });
+
+    const userLists = users.map(user => {
+      let userId = user._id;
+      let userOwnedList = {
+        userId,
+        words: wordsList,
+      };
+      return userOwnedList;
     });
-    return User.insertMany(newUsers);
+    return List.insertMany(userLists);
   })
   .then(results => {
     console.info(results);
