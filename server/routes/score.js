@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
       const wordsPlusScores = words.map(word => {
         let parsedObj = {};
         parsedObj.germanWord = word.germanWord;
-        parsedObj.Mvalue= word.Mvalue;
+        parsedObj.mValue= word.mValue;
         return parsedObj;
       });
       res.json(wordsPlusScores);

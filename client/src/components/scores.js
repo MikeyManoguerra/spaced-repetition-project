@@ -10,7 +10,7 @@ export class ScorePage extends React.Component {
 
   render() {
     let list = this.props.scores.map((score) => {
-      return <li className='score-item'>{score.germanWord} <span>{score.Mvalue}</span> </li>
+      return <li className='score-item'>{score.germanWord} <span>{score.mValue}</span> </li>
     })
 
     return (

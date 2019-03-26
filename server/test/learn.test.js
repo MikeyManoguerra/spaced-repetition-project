@@ -48,7 +48,7 @@ describe('German API - learn', function () {
           let item = {};
           item.germanWord = word.germanWord;
           item.englishWord = word.englishWord;
-          item.Mvalue = word.Mvalue;
+          item.mValue = word.mValue;
           return item;
         });
         const newUsers = users.map(user => {

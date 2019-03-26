@@ -97,7 +97,7 @@ router.post('/', (req, res, next) => {
             let item = {};
             item.germanWord = word.germanWord;
             item.englishWord = word.englishWord;
-            item.Mvalue = word.Mvalue;
+            item.mValue = word.mValue;
             item.pointer = word.pointer;
             item._id = word.wordId;
             return item;

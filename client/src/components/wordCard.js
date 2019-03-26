@@ -19,7 +19,7 @@ export class Card extends React.Component {
 	handleClick = () => {
 		this.evaluateAnswer(this.props.answer) === true ? this.props.dispatch(evaluateAnswer('true')) :
 			this.props.dispatch(evaluateAnswer('false'));
-		this.evaluateAnswer(this.props.answer) === true ? this.props.word.Mvalue *= 2 : this.props.word.Mvalue = 1;
+		this.evaluateAnswer(this.props.answer) === true ? this.props.word.mValue *= 2 : this.props.word.mValue = 1;
 		this.evaluateAnswer(this.props.answer) === true ? this.props.dispatch(handleStreakCorrect()) : this.props.dispatch(handleStreakIncorrext())
 	}
 
@@ -58,7 +58,7 @@ export class Card extends React.Component {
 					onChange={this.handleChange}></input>
 				<button onClick={() => this.handleClick()}>Submit answer</button>
 				{next}
-				<p>Word Score: {this.props.word.Mvalue}</p>
+				<p>Word Score: {this.props.word.mValue}</p>
 			</div>
 		)
 	}

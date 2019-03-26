@@ -22,7 +22,7 @@ mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true })
       let item = {};
       item.germanWord = word.germanWord;
       item.englishWord = word.englishWord;
-      item.Mvalue = word.Mvalue;
+      item.mValue = word.mValue;
       item.pointer = word.pointer;
       return item;
     });

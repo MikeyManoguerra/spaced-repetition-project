@@ -3,74 +3,144 @@ const words = [
     '_id': '111111111111111111111101',
     'germanWord': 'kopfschmerzen',
     'englishWord': 'headache',
-    'Mvalue': 1,
-    'pointer':1
+    'mValue': 1,
+    'pointer': 1
   },
   {
     '_id': '111111111111111111111102',
     'germanWord': 'prost',
     'englishWord': 'cheers',
-    'Mvalue': 1,
-    'pointer':2
+    'mValue': 1,
+    'pointer': 2
   },
   {
     '_id': '111111111111111111111103',
     'germanWord': 'getränk',
     'englishWord': 'drink',
-    'Mvalue': 1,
-    'pointer':3
+    'mValue': 1,
+    'pointer': 3
   },
   {
     '_id': '111111111111111111111104',
     'germanWord': 'barhocker',
     'englishWord': 'barstool',
-    'Mvalue': 1,
-    'pointer':4
+    'mValue': 1,
+    'pointer': 4
   },
   {
     '_id': '111111111111111111111105',
     'germanWord': 'brezel',
     'englishWord': 'pretzel',
-    'Mvalue': 1,
-    'pointer':5
+    'mValue': 1,
+    'pointer': 5
   },
   {
     '_id': '111111111111111111111106',
     'germanWord': 'danke',
     'englishWord': 'thank you',
-    'Mvalue': 1,
-    'pointer':6
+    'mValue': 1,
+    'pointer': 6
 
   },
   {
     '_id': '111111111111111111111107',
     'germanWord': 'ein anderes, bitte',
     'englishWord': 'another, please',
-    'Mvalue': 1,
-    'pointer':7
+    'mValue': 1,
+    'pointer': 7
 
   },
   {
     '_id': '111111111111111111111108',
     'germanWord': 'badezimmer',
     'englishWord': 'bathroom',
-    'Mvalue': 1,
-    'pointer':8
+    'mValue': 1,
+    'pointer': 8
 
   },
   {
     '_id': '111111111111111111111109',
     'germanWord': 'leeren',
     'englishWord': 'empty',
-    'Mvalue': 1,
-    'pointer':9
+    'mValue': 1,
+    'pointer': 9
   },
   {
     '_id': '111111111111111111111110',
     'germanWord': 'taxi',
     'englishWord': 'taxi',
-    'Mvalue': 1,
+    'mValue': 1,
     'pointer': null
+  },
+  {
+    '_id': '111111111111111111111111',
+    'germanWord': 'bier',
+    'englishWord': 'beer',
+    'mValue': 1,
+    'pointer': 11
+  },
+  {
+    '_id': '111111111111111111111112',
+    'germanWord': 'nachfüllung',
+    'englishWord': 'refill',
+    'mValue': 1,
+    'pointer': 12
+  },
+  {
+    '_id': '111111111111111111111113',
+    'germanWord': 'betrunken',
+    'englishWord': 'drunk',
+    'mValue': 1,
+    'pointer': 13
+  },
+  {
+    '_id': '111111111111111111111114',
+    'germanWord': 'water',
+    'englishWord': 'wasser',
+    'mValue': 1,
+    'pointer': 14
+  },
+  {
+    '_id': '111111111111111111111115',
+    'germanWord': 'ich bin durstig',
+    'englishWord': 'i am thirsty',
+    'mValue': 1,
+    'pointer': 15
+  },
+  {
+    '_id': '111111111111111111111116',
+    'germanWord': 'Du solltest nach Hause gehen',
+    'englishWord': 'you should walk home',
+    'mValue': 1,
+    'pointer': 16
+  },
+  {
+    '_id': '111111111111111111111117',
+    'germanWord': 'ich habe Hunger',
+    'englishWord': 'i am hungry',
+    'mValue': 1,
+    'pointer': 17
+  },
+  {
+    '_id': '111111111111111111111118',
+    'germanWord': 'stolpern',
+    'englishWord': 'stumble',
+    'mValue': 1,
+    'pointer': 18
+  },
+  {
+    '_id': '111111111111111111111119',
+    'germanWord': ' wie heißen Sie?',
+    'englishWord': 'what is your name?',
+    'mValue': 1,
+    'pointer': 19
+  },
+  {
+    '_id': '111111111111111111111120',
+    'germanWord': 'bist du Single?',
+    'englishWord': 'are you single?',
+    'mValue': 1,
+    'pointer': 20
   }
 
 ];
@@ -87,7 +157,8 @@ const users = [
     'fullname': 'guinea pig',
     'username': 'iloveCarrots',
     'password': '$2a$10$mqncnGKGiuuTcZLXjtsqYOwjGx1rsVefvuEMvaLvpFv7MBXyO9po6'
-  },
+  }
+
 ];
 
 module.exports = { words, users };

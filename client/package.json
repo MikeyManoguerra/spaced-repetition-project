@@ -2,18 +2,25 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "description": "Express backend",
+  "license": "MIT",
+  "repository": {
+    "type": "git"
+  },
   "devDependencies": {
     "react-scripts": "2.1.8"
   },
   "dependencies": {
+    "form": "^0.2.4",
     "jwt-decode": "^2.2.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
-    "redux-form": "^7.4.2",
-    "redux-thunk": "^2.3.0"
+    "redux-form": "^8.1.0",
+    "redux-thunk": "^2.3.0",
+    "ts-pnp": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -46,16 +46,16 @@ router.post('/', (req, res, next) => {
 
       // handle Memory score
       if (correct) {
-        wordList[head].Mvalue *= 2;
+        wordList[head].mValue *= 2;
       } else {
-        wordList[head].Mvalue = 1;
+        wordList[head].mValue = 1;
       }
 
       // store list heads pointer 
       let next = wordList[head].pointer;
 
       // checks for M value that is larger than list length
-      if (wordList[head].Mvalue > 9) {
+      if (wordList[head].mValue > 9) {
         let currentWord = wordList[head];
 
         // finds end of list
@@ -71,11 +71,11 @@ router.post('/', (req, res, next) => {
       else {
         let counter = 1;
         let currentAddress = head;
-        while (counter <= wordList[head].Mvalue) {
+        while (counter <= wordList[head].mValue) {
           currentAddress = wordList[currentAddress].pointer;
           counter++;
         }
-        // list heads new address now in a place in the list according to Mvalue
+        // list heads new address now in a place in the list according to mValue
         wordList[head].pointer = wordList[currentAddress].pointer;
         wordList[currentAddress].pointer = head;
       }
