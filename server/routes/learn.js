@@ -10,17 +10,20 @@ const passport = require('passport');
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/', (req, res, next) => {
+  let mValue;
   const userId = req.user.id;
   return List.findOne({ userId: userId, learning: 'german' })
     .then((userList) => {
       let index = userList.head;
       const wordId = userList.words[index].wordId;
+      mValue = userList.words[index].mValue;
       return Word.findOne({ _id: wordId });
     })
     .then((word) => {
       const wordToLearn = {
         germanWord: word.germanWord,
-        mValue: word.mValue
+        englishWord: word.englishWord,
+        mValue,
       };
       return res.json(wordToLearn);
     })
@@ -38,31 +41,46 @@ router.post('/', (req, res, next) => {
     return next(err);
   }
 
-  // get list head , the word client just answered
-  return User.findOne({ _id: userId })
-    .then(user => {
-      let wordList = user.words;
-      let head = user.head;
+  let listId;
+  let wordList;
+  let head;
 
+  // get list head , the word client just answered
+  return List.findOne({ userId: userId, learning: 'german' })
+    .then(list => {
+
+      if (!list) {
+        const err = new Error('User\'s bar german word list not found ');
+        err.status = 404;
+        return next(err);
+      }
+
+      listId = list.id;
+      wordList = list.words;
+      head = list.head;
       // make sure client is answered word that is the list head
-      if (wordList[head].germanWord !== germanWord) {
+      const idOfWordAtHead = wordList[head].wordId;
+      return Word.findOne({ _id: idOfWordAtHead });
+    })
+    .then((word) => {
+      if (word.germanWord !== germanWord) {
         const err = new Error('User word does not match current DB word');
         err.status = 400;
         return next(err);
       }
 
       // handle Memory score
-      if (correct) {
+      if (correct && wordList[head].mValue < wordList.length) {
         wordList[head].mValue *= 2;
-      } else {
-        wordList[head].mValue = 1;
+      } else if (!correct && wordList[head].mValue > 2) {
+        wordList[head].mValue /= 2;
       }
 
       // store list heads pointer 
       let next = wordList[head].pointer;
 
       // checks for M value that is larger than list length
-      if (wordList[head].mValue > 9) {
+      if (wordList[head].mValue > wordList.length) {
         let currentWord = wordList[head];
 
         // finds end of list
@@ -89,14 +107,13 @@ router.post('/', (req, res, next) => {
 
       //  sets new head to the next value ( heads pointer), stored above.
       head = next;
-
       //  update DB
-      return User.findOneAndUpdate({ _id: userId }, { $set: { words: wordList, head: head } })
-        .then(() => {
-          res.sendStatus(204);
-        })
-        .catch(err => next(err));
-    });
+      return List.findOneAndUpdate({ _id: listId }, { $set: { words: wordList, head: head } })
+    })
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(err => next(err));
 });
 
 module.exports = router;
