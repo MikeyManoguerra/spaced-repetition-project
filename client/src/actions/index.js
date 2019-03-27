@@ -30,6 +30,7 @@ export const getQuestion = () => (dispatch, getState) => {
       return res.json();
     })
     .then(question => {
+      console.log(question);
       dispatch(getQuestionSuccess(question));
     })
 }

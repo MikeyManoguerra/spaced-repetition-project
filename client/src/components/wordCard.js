@@ -49,7 +49,7 @@ export class Card extends React.Component {
 		}
 		return (
 			<div className="card">
-				<p>{feedback}</p>
+			
 				<h2>{this.props.word.germanWord}</h2>
 				<div className="line" style={{ backgroundColor: this.props.bgc }}></div>
 				<p className='card-text'></p>
@@ -58,6 +58,7 @@ export class Card extends React.Component {
 					onChange={this.handleChange}></input>
 				<button onClick={() => this.handleClick()}>Submit answer</button>
 				{next}
+				<p>{feedback}</p>
 				<p>Word Score: {this.props.word.mValue}</p>
 			</div>
 		)
