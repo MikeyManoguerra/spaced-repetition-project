@@ -45,18 +45,25 @@ export class Card extends React.Component {
 		};
 		let next;
 		if (this.props.correct) {
-			next = <button onClick={() => this.handleNext()}>Next Question</button>
+			next = <button onClick={() => this.handleNext()}>Get Another!</button>
 		}
 		return (
 			<div className="card">
-			
+
 				<h2>{this.props.word.germanWord}</h2>
 				<div className="line" style={{ backgroundColor: this.props.bgc }}></div>
 				<p className='card-text'></p>
-				<input className='user-input' name='text' type='text'
+				<input className='user-input'
+					name='text'
+					type='text'
 					placeholder='answer'
-					onChange={this.handleChange}></input>
-				<button onClick={() => this.handleClick()}>Submit answer</button>
+					onChange={this.handleChange}>
+				</input>
+				<button
+					className='submit-button'
+					onClick={() => this.handleClick()}>
+					Submit Guess
+				</button>
 				{next}
 				<p>{feedback}</p>
 				<p>Word Score: {this.props.word.mValue}</p>

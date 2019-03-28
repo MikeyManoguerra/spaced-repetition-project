@@ -16,7 +16,9 @@ export class ScorePage extends React.Component {
     return (
       <div className="dashboard">
         <div className="dashboard-username">
-          <h2 className='dashboard-welcome'>Welcome {this.props.username}!</h2>
+          <h2 className='dashboard-welcome'>
+            Welcome {this.props.username}!
+          </h2>
           <h3>Word Score</h3>
         </div>
         <ul className='score-list'>{list}</ul>
