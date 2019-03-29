@@ -23,6 +23,7 @@ router.get('/', (req, res, next) => {
       const wordToLearn = {
         germanWord: word.germanWord,
         englishWord: word.englishWord,
+        wordId: word._id,
         mValue,
       };
       return res.json(wordToLearn);
@@ -32,7 +33,22 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const userId = req.user.id;
-  const { germanWord, correct } = req.body;
+  const { germanWord, _id, mValue, userAnswer } = req.body;
+
+  // temp code.
+  let correct = true;
+
+
+  // TODO below code checks incoming user answer.
+
+
+  // if (word.toLowerCase() === this.props.word.englishWord.toLowerCase()) {
+  //   return true;
+  // }
+  // else {
+  //   return false;
+  // }
+
 
   // Check if client sends response boolean
   if (typeof correct !== 'boolean') {

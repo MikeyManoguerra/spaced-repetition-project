@@ -35,12 +35,35 @@ export const getQuestion = () => (dispatch, getState) => {
     })
 }
 
-export const EVALUATE_ANSWER = 'EVALUATE_ANSWER';
-
-export const evaluateAnswer = bool => ({
-  type: EVALUATE_ANSWER,
-  bool
+export const REVEAL_ANSWER = 'REVEAL_ANSWER';
+export const revealAnswer = serverAnswerObject => ({
+  type: REVEAL_ANSWER,
+  serverAnswerObject
 })
+
+export const EVALUATE_ANSWER = 'EVALUATE_ANSWER';
+export const evaluateAnswer = (userAnswerObject) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/learn`, {
+    method: 'POST',
+    // mode: 'no-cors',
+    body: JSON.stringify(userAnswerObject),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    }
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error('no answer response!')
+    }
+    return res.json()
+  })
+    .then(serverAnswerObject => {
+      // response is correct answer with 
+      // english word
+      return dispatch(revealAnswer(serverAnswerObject))
+    }).catch(err => console.log(err))
+}
 
 export const RESET_ANSWER_STATUS = 'RESET_ANSWER_STATUS';
 

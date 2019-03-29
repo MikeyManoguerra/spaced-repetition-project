@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import { setAnswer, evaluateAnswer, resetAnswerStatus, nextQuestion, handleStreakCorrect, handleStreakIncorrext, getQuestion } from '../actions/index'
 
 export class Card extends React.Component {
-	evaluateAnswer = (word) => {
-		if (word.toLowerCase() === this.props.word.englishWord.toLowerCase()) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	buildAndDispatchEvalObject = (userAnswer) => {
+		const wordWithAnswer = Object.assign({}, this.props.word, {
+			userAnswer,
+		})
+		this.props.dispatch(evaluateAnswer(wordWithAnswer))
 	}
 
 	handleChange = (e) => {
@@ -17,10 +15,11 @@ export class Card extends React.Component {
 	}
 
 	handleClick = () => {
-		this.evaluateAnswer(this.props.answer) === true ? this.props.dispatch(evaluateAnswer('true')) :
-			this.props.dispatch(evaluateAnswer('false'));
-		this.evaluateAnswer(this.props.answer) === true ? this.props.word.mValue *= 2 : this.props.word.mValue = 1;
-		this.evaluateAnswer(this.props.answer) === true ? this.props.dispatch(handleStreakCorrect()) : this.props.dispatch(handleStreakIncorrext())
+		this.buildAndDispatchEvalObject(this.props.answer)
+		// this.evaluateAnswer(this.props.answer) === true ? this.props.dispatch(evaluateAnswer('true')) :
+		// 	this.props.dispatch(evaluateAnswer('false'));
+		// this.evaluateAnswer(this.props.answer) === true ? this.props.word.mValue *= 2 : this.props.word.mValue = 1;
+		// this.evaluateAnswer(this.props.answer) === true ? this.props.dispatch(handleStreakCorrect()) : this.props.dispatch(handleStreakIncorrext())
 	}
 
 	handleNext = () => {
@@ -41,7 +40,7 @@ export class Card extends React.Component {
 		if (this.props.correct === 'true') {
 			feedback = 'You got it Right!'
 		} else if (this.props.correct === 'false') {
-			feedback = `Wrong! The answer is ${this.props.word.englishWord}`
+			feedback = `Wrong! The answer is ${this.props.englishWord}`
 		};
 		let next;
 		if (this.props.correct) {
@@ -77,8 +76,9 @@ const mapStateToProps = state => ({
 	answer: state.main.answer,
 	streak: state.main.streak,
 	feedback: state.main.feedback,
+	englishWord: state.main.correct.englishWord,
 	word: state.main.currentWord,
-	correct: state.main.correct
+	correct: state.main.correct.correct
 });
 
 export default connect(mapStateToProps)(Card);
