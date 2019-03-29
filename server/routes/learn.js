@@ -69,6 +69,13 @@ router.post('/', (req, res, next) => {
         return next(err);
       }
 
+      // if (word.toLowerCase() === this.props.word.englishWord.toLowerCase()) {
+      //   return true;
+      // }
+      // else {
+      //   return false;
+      // }
+
       // handle Memory score
       if (correct && wordList[head].mValue < wordList.length) {
         wordList[head].mValue *= 2;
