@@ -13,8 +13,10 @@ import {
 
 
 const initialState = {
+  //TODO change answer to userAnswer
+
   answer: '',
-  correct: null,
+  correctAnswer: null,
   currentWord: 'null',
   streak: 0,
   scores: []
@@ -36,7 +38,7 @@ export const mainReducer = (state = initialState, action) => {
 
   else if (action.type === REVEAL_ANSWER) {
     return Object.assign({}, state, {
-      correct: action.serverAnswerObject
+      correctAnswer: action.correctAnswer
     })
   }
 

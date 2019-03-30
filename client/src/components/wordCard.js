@@ -1,6 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAnswer, evaluateAnswer, resetAnswerStatus, nextQuestion, handleStreakCorrect, handleStreakIncorrext, getQuestion } from '../actions/index'
+import {
+	setAnswer,
+	evaluateAnswer,
+	resetAnswerStatus,
+	nextQuestion,
+	handleStreakCorrect,
+	handleStreakIncorrext,
+	getQuestion
+} from '../actions/index'
 
 export class Card extends React.Component {
 	buildAndDispatchEvalObject = (userAnswer) => {
@@ -15,6 +23,7 @@ export class Card extends React.Component {
 	}
 
 	handleClick = () => {
+		//TODO change answer to userAnswer
 		this.buildAndDispatchEvalObject(this.props.answer)
 		// this.evaluateAnswer(this.props.answer) === true ? this.props.dispatch(evaluateAnswer('true')) :
 		// 	this.props.dispatch(evaluateAnswer('false'));
@@ -40,7 +49,7 @@ export class Card extends React.Component {
 		if (this.props.correct === 'true') {
 			feedback = 'You got it Right!'
 		} else if (this.props.correct === 'false') {
-			feedback = `Wrong! The answer is ${this.props.englishWord}`
+			feedback = `Wrong! The answer is `//${this.props.englishWord}`
 		};
 		let next;
 		if (this.props.correct) {
@@ -76,9 +85,9 @@ const mapStateToProps = state => ({
 	answer: state.main.answer,
 	streak: state.main.streak,
 	feedback: state.main.feedback,
-	englishWord: state.main.correct.englishWord,
+	// englishWord: state.main.correctAnswer.englishWord,
 	word: state.main.currentWord,
-	correct: state.main.correct.correct
+	// correct: state.main.correctAnswer.correct
 });
 
 export default connect(mapStateToProps)(Card);

@@ -36,9 +36,9 @@ export const getQuestion = () => (dispatch, getState) => {
 }
 
 export const REVEAL_ANSWER = 'REVEAL_ANSWER';
-export const revealAnswer = serverAnswerObject => ({
+export const revealAnswer = correctAnswer => ({
   type: REVEAL_ANSWER,
-  serverAnswerObject
+  correctAnswer
 })
 
 export const EVALUATE_ANSWER = 'EVALUATE_ANSWER';
@@ -58,10 +58,10 @@ export const evaluateAnswer = (userAnswerObject) => (dispatch, getState) => {
     }
     return res.json()
   })
-    .then(serverAnswerObject => {
+    .then(correctAnswer => {
       // response is correct answer with 
       // english word
-      return dispatch(revealAnswer(serverAnswerObject))
+      return dispatch(revealAnswer(correctAnswer))
     }).catch(err => console.log(err))
 }
 

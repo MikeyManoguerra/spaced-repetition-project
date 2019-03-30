@@ -33,33 +33,18 @@ router.get('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   const userId = req.user.id;
-  const { germanWord, _id, mValue, userAnswer } = req.body;
+  const {
+    germanWord,
+    userAnswer,
+    _id,
+    mValue,
+  } = req.body;
 
-  // temp code.
-  let correct = true;
-
-
-  // TODO below code checks incoming user answer.
-
-
-  // if (word.toLowerCase() === this.props.word.englishWord.toLowerCase()) {
-  //   return true;
-  // }
-  // else {
-  //   return false;
-  // }
-
-
-  // Check if client sends response boolean
-  if (typeof correct !== 'boolean') {
-    const err = new Error('Did not include result boolean');
-    err.status = 400;
-    return next(err);
-  }
-
+  let correct;
   let listId;
   let wordList;
   let head;
+  let correctAnswer;
 
   // get list head , the word client just answered
   return List.findOne({ userId: userId, learning: 'german' })
@@ -85,12 +70,14 @@ router.post('/', (req, res, next) => {
         return next(err);
       }
 
-      // if (word.toLowerCase() === this.props.word.englishWord.toLowerCase()) {
-      //   return true;
-      // }
-      // else {
-      //   return false;
-      // }
+
+      // evaluate user answer
+      if (userAnswer.toLowerCase() === word.englishWord.toLowerCase()) {
+        correct = true;
+      }
+      else {
+        correct = false;
+      }
 
       // handle Memory score
       if (correct && wordList[head].mValue < wordList.length) {
@@ -98,6 +85,11 @@ router.post('/', (req, res, next) => {
       } else if (!correct && wordList[head].mValue > 2) {
         wordList[head].mValue /= 2;
       }
+
+      // save word user just answered with updated mValue (mValue temporarily
+      //  added to onject form words collection)
+      correctAnswer = word;
+      correctAnswer.mValue = wordList[head].mValue;
 
       // store list heads pointer 
       let next = wordList[head].pointer;
@@ -129,12 +121,21 @@ router.post('/', (req, res, next) => {
       }
 
       //  sets new head to the next value ( heads pointer), stored above.
+
       head = next;
       //  update DB
       return List.findOneAndUpdate({ _id: listId }, { $set: { words: wordList, head: head } })
     })
     .then(() => {
-      res.sendStatus(204);
+      const responseObject = {
+        correct,
+        mValue: correctAnswer.mValue,
+        germanWord: correctAnswer.germanWord,
+        englishWord: correctAnswer.englishWord,
+        userAnswer
+      };
+      return res.json(responseObject);
+
     })
     .catch(err => next(err));
 });
