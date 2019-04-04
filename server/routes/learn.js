@@ -92,7 +92,7 @@ router.post('/', (req, res, next) => {
       correctAnswer.mValue = wordList[head].mValue;
 
       // store list heads pointer 
-      let next = wordList[head].pointer;
+      let nextPointer = wordList[head].pointer;
 
       // checks for M value that is larger than list length
       if (wordList[head].mValue > wordList.length) {
@@ -100,8 +100,8 @@ router.post('/', (req, res, next) => {
 
         // finds end of list
         while (currentWord.pointer !== null) {
-          let next = currentWord.pointer;
-          currentWord = wordList[next];
+          let nextPointer = currentWord.pointer;
+          currentWord = wordList[nextPointer];
         }
         //  list end now second to last, list hed put at end
         currentWord.pointer = head;
@@ -120,9 +120,9 @@ router.post('/', (req, res, next) => {
         wordList[currentAddress].pointer = head;
       }
 
-      //  sets new head to the next value ( heads pointer), stored above.
+      //  sets new head to the nextPointerPointer value ( heads pointer), stored above.
 
-      head = next;
+      head = nextPointer;
       //  update DB
       return List.findOneAndUpdate({ _id: listId }, { $set: { words: wordList, head: head } })
     })

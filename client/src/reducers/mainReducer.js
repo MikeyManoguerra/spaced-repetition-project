@@ -38,13 +38,14 @@ export const mainReducer = (state = initialState, action) => {
 
   else if (action.type === REVEAL_ANSWER) {
     return Object.assign({}, state, {
-      correctAnswer: action.correctAnswer
+      correctAnswer: action.correctAnswer,
+      answer: ''
     })
   }
 
   else if (action.type === RESET_ANSWER_STATUS) {
     return Object.assign({}, state, {
-      correct: null
+      correctAnswer: null
     })
   }
 

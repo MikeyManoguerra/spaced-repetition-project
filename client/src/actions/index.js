@@ -66,10 +66,8 @@ export const evaluateAnswer = (userAnswerObject) => (dispatch, getState) => {
 }
 
 export const RESET_ANSWER_STATUS = 'RESET_ANSWER_STATUS';
-
-export const resetAnswerStatus = payload => ({
-  type: RESET_ANSWER_STATUS,
-  payload
+export const resetAnswerStatus = () => ({
+  type: RESET_ANSWER_STATUS
 });
 
 export const NEXT_QUESTION = 'NEXT_QUESTION';

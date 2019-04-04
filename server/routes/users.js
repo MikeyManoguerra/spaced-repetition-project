@@ -3,6 +3,7 @@
 const express = require('express');
 const User = require('../models/user');
 const Word = require('../models/word');
+const List = require('../models/list');
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ router.post('/', (req, res, next) => {
     });
   }
 
-  
+
   const stringFields = ['username', 'password', 'fullname'];
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
@@ -83,42 +84,49 @@ router.post('/', (req, res, next) => {
     });
   }
 
+  let userId;
+
   return User.hashPassword(password)
     .then(digest => {
       const newUser = {
         username,
         password: digest,
-        fullname: fullname.trim()
+        fullname: fullname ? fullname.trim() : ''
       };
-      return Word.find()
-        // TODO next pointers to word list.
-        .then((words) => {
-          const wordsList = words.map(word => {
-            let item = {};
-            item.germanWord = word.germanWord;
-            item.englishWord = word.englishWord;
-            item.mValue = word.mValue;
-            item.pointer = word.pointer;
-            item._id = word.wordId;
-            return item;
-          });
-          newUser.words = [...wordsList];
-          return User.create(newUser);
-        })
-        .then(result => {
-          console.log(result);
+      return User.create(newUser);
+    })
+    .then((user) => {
+      userId = user._id;
+      return Word.find();
+    })
+    .then((words) => {
+      const wordsList = words.map(word => {
+        let item = {};
+        item.wordId = word._id;
+        item.mValue = word.mValue;
+        item.pointer = word.pointer;
+        return item;
+      });
 
-          return res.status(201).location(`http://${req.headers.host}/api/users/${result.id}`).json(result);
-        })
-        .catch(err => {
-          if (err.code === 11000) {
-            err = new Error('The username already exists');
-            err.status = 400;
-          }
-          next(err);
-        });
-
+      let userOwnedList = {
+        userId,
+        words: wordsList,
+      };
+      List.create(userOwnedList);
+    })
+    .then(result => {
+      console.log(result);
+      return res.status(201).location(`http://${req.headers.host}/api/users/${result.id}`).json(result);
+    })
+    .catch(err => {
+      if (err.code === 11000) {
+        err = new Error('The username already exists');
+        err.status = 400;
+      }
+      next(err);
     });
+
+
 
 });
 
