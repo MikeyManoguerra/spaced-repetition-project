@@ -1,144 +1,144 @@
 const words = [
   {
     '_id': '111111111111111111111101',
-    'germanWord': 'kopfschmerzen',
-    'englishWord': 'headache',
+    'foreignLanguage': 'kopfschmerzen',
+    'nativeLanguage': 'headache',
     'mValue': 1,
     'pointer': 1
   },
   {
     '_id': '111111111111111111111102',
-    'germanWord': 'prost',
-    'englishWord': 'cheers',
+    'foreignLanguage': 'prost',
+    'nativeLanguage': 'cheers',
     'mValue': 1,
     'pointer': 2
   },
   {
     '_id': '111111111111111111111103',
-    'germanWord': 'getränk',
-    'englishWord': 'drink',
+    'foreignLanguage': 'getränk',
+    'nativeLanguage': 'drink',
     'mValue': 1,
     'pointer': 3
   },
   {
     '_id': '111111111111111111111104',
-    'germanWord': 'barhocker',
-    'englishWord': 'barstool',
+    'foreignLanguage': 'barhocker',
+    'nativeLanguage': 'barstool',
     'mValue': 1,
     'pointer': 4
   },
   {
     '_id': '111111111111111111111105',
-    'germanWord': 'brezel',
-    'englishWord': 'pretzel',
+    'foreignLanguage': 'brezel',
+    'nativeLanguage': 'pretzel',
     'mValue': 1,
     'pointer': 5
   },
   {
     '_id': '111111111111111111111106',
-    'germanWord': 'danke',
-    'englishWord': 'thank you',
+    'foreignLanguage': 'danke',
+    'nativeLanguage': 'thank you',
     'mValue': 1,
     'pointer': 6
 
   },
   {
     '_id': '111111111111111111111107',
-    'germanWord': 'ein anderes, bitte',
-    'englishWord': 'another, please',
+    'foreignLanguage': 'ein anderes, bitte',
+    'nativeLanguage': 'another, please',
     'mValue': 1,
     'pointer': 7
 
   },
   {
     '_id': '111111111111111111111108',
-    'germanWord': 'badezimmer',
-    'englishWord': 'bathroom',
+    'foreignLanguage': 'badezimmer',
+    'nativeLanguage': 'bathroom',
     'mValue': 1,
     'pointer': 8
 
   },
   {
     '_id': '111111111111111111111109',
-    'germanWord': 'leeren',
-    'englishWord': 'empty',
+    'foreignLanguage': 'leeren',
+    'nativeLanguage': 'empty',
     'mValue': 1,
     'pointer': 9
   },
   {
     '_id': '111111111111111111111110',
-    'germanWord': 'taxi',
-    'englishWord': 'taxi',
+    'foreignLanguage': 'taxi',
+    'nativeLanguage': 'taxi',
     'mValue': 1,
     'pointer': 10
   },
   {
     '_id': '111111111111111111111111',
-    'germanWord': 'bier',
-    'englishWord': 'beer',
+    'foreignLanguage': 'bier',
+    'nativeLanguage': 'beer',
     'mValue': 1,
     'pointer': 11
   },
   {
     '_id': '111111111111111111111112',
-    'germanWord': 'nachfüllung',
-    'englishWord': 'refill',
+    'foreignLanguage': 'nachfüllung',
+    'nativeLanguage': 'refill',
     'mValue': 1,
     'pointer': 12
   },
   {
     '_id': '111111111111111111111113',
-    'germanWord': 'betrunken',
-    'englishWord': 'drunk',
+    'foreignLanguage': 'betrunken',
+    'nativeLanguage': 'drunk',
     'mValue': 1,
     'pointer': 13
   },
   {
     '_id': '111111111111111111111114',
-    'germanWord': 'wasser',
-    'englishWord': 'water',
+    'foreignLanguage': 'wasser',
+    'nativeLanguage': 'water',
     'mValue': 1,
     'pointer': 14
   },
   {
     '_id': '111111111111111111111115',
-    'germanWord': 'ich bin durstig',
-    'englishWord': 'i am thirsty',
+    'foreignLanguage': 'ich bin durstig',
+    'nativeLanguage': 'i am thirsty',
     'mValue': 1,
     'pointer': 15
   },
   {
     '_id': '111111111111111111111116',
-    'germanWord': 'Du solltest nach Hause gehen',
-    'englishWord': 'you should walk home',
+    'foreignLanguage': 'Du solltest nach Hause gehen',
+    'nativeLanguage': 'you should walk home',
     'mValue': 1,
     'pointer': 16
   },
   {
     '_id': '111111111111111111111117',
-    'germanWord': 'ich habe Hunger',
-    'englishWord': 'i am hungry',
+    'foreignLanguage': 'ich habe Hunger',
+    'nativeLanguage': 'i am hungry',
     'mValue': 1,
     'pointer': 17
   },
   {
     '_id': '111111111111111111111118',
-    'germanWord': 'stolpern',
-    'englishWord': 'stumble',
+    'foreignLanguage': 'stolpern',
+    'nativeLanguage': 'stumble',
     'mValue': 1,
     'pointer': 18
   },
   {
     '_id': '111111111111111111111119',
-    'germanWord': ' wie heißen Sie?',
-    'englishWord': 'what is your name?',
+    'foreignLanguage': ' wie heißen Sie?',
+    'nativeLanguage': 'what is your name?',
     'mValue': 1,
     'pointer': 19
   },
   {
     '_id': '111111111111111111111120',
-    'germanWord': 'bist du Single?',
-    'englishWord': 'are you single?',
+    'foreignLanguage': 'bist du Single?',
+    'nativeLanguage': 'are you single?',
     'mValue': 1,
     'pointer': null
   }

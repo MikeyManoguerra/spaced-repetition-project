@@ -26,10 +26,6 @@ export class Card extends React.Component {
 		e.preventDefault()
 		//TODO change answer to userAnswer
 		this.buildAndDispatchEvalObject(this.props.answer)
-		// this.evaluateAnswer(this.props.answer) === true ? this.props.dispatch(evaluateAnswer('true')) :
-		// 	this.props.dispatch(evaluateAnswer('false'));
-		// this.evaluateAnswer(this.props.answer) === true ? this.props.word.mValue *= 2 : this.props.word.mValue = 1;
-		// this.evaluateAnswer(this.props.answer) === true ? this.props.dispatch(handleStreakCorrect()) : this.props.dispatch(handleStreakIncorrext())
 	}
 
 	handleNext = () => {
@@ -51,7 +47,7 @@ export class Card extends React.Component {
 			if (this.props.correctAnswer.correct === true) {
 				feedback = 'You got it Right!'
 			} else if (this.props.correctAnswer.correct === false) {
-				feedback = `Wrong! The answer is ${this.props.correctAnswer.englishWord}`
+				feedback = `Wrong! The answer is ${this.props.correctAnswer.nativeLanguage}`
 			};
 		}
 		let nextButton;
@@ -64,7 +60,7 @@ export class Card extends React.Component {
 		return (
 			<div className="card">
 				<div className='game-container'>
-					<h2>{this.props.word.germanWord}</h2>
+					<h2>{this.props.word.foreignLanguage}</h2>
 					<div className="line" style={{ backgroundColor: this.props.bgc }}></div>
 					<p className='card-text'></p>
 					<form onSubmit={(e) => this.handleClick(e)}>

@@ -12,7 +12,7 @@ router.use('/', passport.authenticate('jwt', { session: false, failWithError: tr
 router.get('/', (req, res, next) => {
   let mValue;
   const userId = req.user.id;
-  return List.findOne({ userId: userId, learning: 'german' })
+  return List.findOne({ userId: userId }) // can add subject id when user has multiple lists
     .then((userList) => {
       let index = userList.head;
       const wordId = userList.words[index].wordId;
@@ -21,8 +21,8 @@ router.get('/', (req, res, next) => {
     })
     .then((word) => {
       const wordToLearn = {
-        germanWord: word.germanWord,
-        englishWord: word.englishWord,
+        foreignLanguage: word.foreignLanguage,
+        nativeLanguage: word.nativeLanguage,
         wordId: word._id,
         mValue,
       };
@@ -34,7 +34,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const userId = req.user.id;
   const {
-    germanWord,
+    foreignLanguage,
     userAnswer,
     _id,
     mValue,
@@ -47,7 +47,7 @@ router.post('/', (req, res, next) => {
   let correctAnswer;
 
   // get list head , the word client just answered
-  return List.findOne({ userId: userId, learning: 'german' })
+  return List.findOne({ userId: userId })
     .then(list => {
 
       if (!list) {
@@ -64,7 +64,7 @@ router.post('/', (req, res, next) => {
       return Word.findOne({ _id: idOfWordAtHead });
     })
     .then((word) => {
-      if (word.germanWord !== germanWord) {
+      if (word.foreignLanguage !== foreignLanguage) {
         const err = new Error('User word does not match current DB word');
         err.status = 400;
         return next(err);
@@ -72,7 +72,7 @@ router.post('/', (req, res, next) => {
 
 
       // evaluate user answer
-      if (userAnswer.toLowerCase() === word.englishWord.toLowerCase()) {
+      if (userAnswer.toLowerCase() === word.nativeLanguage.toLowerCase()) {
         correct = true;
       }
       else {
@@ -130,8 +130,8 @@ router.post('/', (req, res, next) => {
       const responseObject = {
         correct,
         mValue: correctAnswer.mValue,
-        germanWord: correctAnswer.germanWord,
-        englishWord: correctAnswer.englishWord,
+        foreignLanguage: correctAnswer.foreignLanguage,
+        nativeLanguage: correctAnswer.nativeLanguage,
         userAnswer
       };
       return res.json(responseObject);

@@ -58,7 +58,11 @@ body{
   margin-top: 5%;
   color: black;
   padding: 10px;
+}
 
+.dashboard.scores{
+  height:auto;
+  margin-bottom: 5%;
 }
 
 .card{

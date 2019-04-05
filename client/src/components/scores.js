@@ -10,11 +10,11 @@ export class ScorePage extends React.Component {
 
   render() {
     let list = this.props.scores.map((score) => {
-      return <li className='score-item'>{score.germanWord} <span>{score.mValue}</span> </li>
+      return <li className='score-item'>{score.foreignWord} <span>{score.mValue}</span> </li>
     })
 
     return (
-      <div className="dashboard">
+      <div className="dashboard scores">
         <div className="dashboard-username">
           <h2 className='dashboard-welcome'>
             Welcome {this.props.username}!

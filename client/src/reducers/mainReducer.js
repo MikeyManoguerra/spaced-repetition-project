@@ -26,10 +26,9 @@ const initialState = {
 export const mainReducer = (state = initialState, action) => {
   if (action.type === SET_ANSWER) {
     return Object.assign({}, state, {
-      answer: action.payload
+      answer: action.userInput
     })
   }
-
   else if (action.type === GET_QUESTION_SUCCESS) {
     return Object.assign({}, state, {
       currentWord: action.question
@@ -63,7 +62,7 @@ export const mainReducer = (state = initialState, action) => {
 
   else if (action.type === GET_SCORES_SUCCESS) {
     return Object.assign({}, state, {
-      scores: [...action.payload]
+      scores: [...action.scores]
     })
   }
   return state

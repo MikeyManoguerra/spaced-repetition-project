@@ -4,7 +4,7 @@ const listSchema = new mongoose.Schema({
   words: { type: Array, default: undefined },
   head: { type: Number, default: 0 },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  learning: { type: String, default: 'german' }
+  subjectId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 // Add `createdAt` and `updatedAt` fields
 listSchema.set('timestamps', true);

@@ -18,16 +18,16 @@ router.get('/', (req, res, next) => {
       let wordsPlusScores = [];
       userList.words.forEach(userWord => {
         words.forEach(word => {
-          if (userWord.wordId.equals(word._id)) {
+          if (word['id'] === userWord['wordId']) {
             let wordWithValue = {
-              germanWord: word.germanWord,
+              foreignLanguage: word.foreignLanguage,
               mValue: userWord.mValue
             };
             wordsPlusScores.push(wordWithValue);
           }
         });
       });
-      res.json(wordsPlusScores);
+      return res.json(wordsPlusScores);
     })
     .catch(err => next(err));
 });

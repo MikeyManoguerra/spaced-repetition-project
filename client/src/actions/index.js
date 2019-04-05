@@ -1,9 +1,9 @@
 import { API_BASE_URL } from '../config'
 export const SET_ANSWER = 'SET_ANSWER';
 
-export const setAnswer = payload => ({
+export const setAnswer = userInput => ({
   type: SET_ANSWER,
-  payload
+  userInput
 });
 
 export const GET_QUESTION = 'GET_QUESTION';
@@ -59,8 +59,11 @@ export const evaluateAnswer = (userAnswerObject) => (dispatch, getState) => {
     return res.json()
   })
     .then(correctAnswer => {
-      // response is correct answer with 
-      // english word
+      if (correctAnswer.correct) {
+        dispatch(handleStreakCorrect())
+      } else {
+        dispatch(handleStreakIncorrext())
+      }
       return dispatch(revealAnswer(correctAnswer))
     }).catch(err => console.log(err))
 }
@@ -72,12 +75,12 @@ export const resetAnswerStatus = () => ({
 
 export const NEXT_QUESTION = 'NEXT_QUESTION';
 
-export const nextQuestion = (germanWord, correct) => (dispatch, getState) => {
+export const nextQuestion = (foreignLanguage, correct) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/learn`, {
     method: 'POST',
     // mode: 'no-cors',
-    body: JSON.stringify({ germanWord: germanWord, correct: correct }),
+    body: JSON.stringify({ foreignLanguage: foreignLanguage, correct: correct }),
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`
@@ -87,25 +90,25 @@ export const nextQuestion = (germanWord, correct) => (dispatch, getState) => {
 
 export const HANDLE_STREAK_CORRECT = 'HANDLE_STREAK_CORRECT';
 
-export const handleStreakCorrect = payload => ({
+export const handleStreakCorrect = () => ({
   type: HANDLE_STREAK_CORRECT,
-  payload
+
 })
 
 export const HANDLE_STREAK_INCORRECT = 'HANDLE_STREAK_INCORRECT';
 
-export const handleStreakIncorrext = payload => ({
+export const handleStreakIncorrext = () => ({
   type: HANDLE_STREAK_INCORRECT,
-  payload
+
 })
 
 export const GET_SCORES = 'GET_SCORES';
 
 export const GET_SCORES_SUCCESS = 'GET_SCORES_SUCCESS';
 
-export const getScoresSuccess = payload => ({
+export const getScoresSuccess = (scores) => ({
   type: GET_SCORES_SUCCESS,
-  payload
+  scores
 })
 
 export const getScores = () => (dispatch, getState) => {

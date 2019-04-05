@@ -46,8 +46,8 @@ describe('German API - learn', function () {
       .then(words => {
         const wordsList = words.map(word => {
           let item = {};
-          item.germanWord = word.germanWord;
-          item.englishWord = word.englishWord;
+          item.foreignLanguage = word.foreignLanguage;
+          item.nativeLanguage = word.nativeLanguage;
           item.mValue = word.mValue;
           return item;
         });
@@ -87,7 +87,7 @@ describe('German API - learn', function () {
           const word = user.words[0];
           expect(res).to.have.status(200);
           expect(res).to.be.json;
-          expect(word.germanWord).to.equal(res.body.germanWord);
+          expect(word.foreignLanguage).to.equal(res.body.foreignLanguage);
         });
     });
   });

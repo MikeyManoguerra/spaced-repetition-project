@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 
 const wordSchema = new mongoose.Schema({
-  germanWord: { type: String, required: true },
-  englishWord: { type: String, required: true },
-  mValue: {type: Number, required: true},
+  foreignLanguage: { type: String, required: true },
+  nativeLanguage: { type: String, required: true },  
   pointer: {type: Number}
 });
-// Add `createdAt` and `updatedAt` fields
-wordSchema.set('timestamps', true);
 
 
 wordSchema.set('toJSON', {
