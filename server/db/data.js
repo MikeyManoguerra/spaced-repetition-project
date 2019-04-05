@@ -95,8 +95,8 @@ const words = [
   },
   {
     '_id': '111111111111111111111114',
-    'germanWord': 'water',
-    'englishWord': 'wasser',
+    'germanWord': 'wasser',
+    'englishWord': 'water',
     'mValue': 1,
     'pointer': 14
   },
