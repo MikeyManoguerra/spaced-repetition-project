@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
     .then((word) => {
       const wordToLearn = {
         foreignLanguage: word.foreignLanguage,
-        nativeLanguage: word.nativeLanguage,
+        // nativeLanguage: word.nativeLanguage,
         wordId: word._id,
         mValue,
       };

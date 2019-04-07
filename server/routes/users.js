@@ -4,6 +4,7 @@ const express = require('express');
 const User = require('../models/user');
 const Word = require('../models/word');
 const List = require('../models/list');
+const Subject = require('../models/subject')
 
 const router = express.Router();
 
@@ -97,13 +98,16 @@ router.post('/', (req, res, next) => {
     })
     .then((user) => {
       userId = user._id;
-      return Word.find();
+      return Promise.all([
+        Word.find(),
+        Subject.findOne({ subject: 'german' })
+      ]);
     })
-    .then((words) => {
+    .then(([words, subject]) => {
       const wordsList = words.map(word => {
         let item = {};
         item.wordId = word._id;
-        item.mValue = word.mValue;
+        item.mValue = 1;
         item.pointer = word.pointer;
         return item;
       });
@@ -111,8 +115,9 @@ router.post('/', (req, res, next) => {
       let userOwnedList = {
         userId,
         words: wordsList,
+        subjectId: subject._id
       };
-      List.create(userOwnedList);
+      return List.create(userOwnedList);
     })
     .then(result => {
       console.log(result);
