@@ -4,9 +4,6 @@ import {
 	setAnswer,
 	evaluateAnswer,
 	resetAnswerStatus,
-	nextQuestion,
-	handleStreakCorrect,
-	handleStreakIncorrext,
 	getQuestion
 } from '../actions/index'
 
