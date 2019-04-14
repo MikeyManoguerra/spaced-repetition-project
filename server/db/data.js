@@ -1,4 +1,5 @@
-const words = [
+const germanWords = [
+
   {
     '_id': '111111111111111111111101',
     'foreignLanguage': 'kopfschmerzen',
@@ -161,4 +162,4 @@ const users = [
 
 ];
 
-module.exports = { words, users };
+module.exports = { germanWords, users };
