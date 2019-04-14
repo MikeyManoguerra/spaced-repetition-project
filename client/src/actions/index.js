@@ -1,20 +1,27 @@
 import { API_BASE_URL } from '../config'
-export const SET_ANSWER = 'SET_ANSWER';
 
+export const SET_ANSWER = 'SET_ANSWER';
 export const setAnswer = userInput => ({
   type: SET_ANSWER,
   userInput
 });
 
-export const GET_QUESTION = 'GET_QUESTION';
+export const SET_CURRENT_LANGUAGE = 'SET_CURRENT_LANGUAGE';
+export const setCurrentLanguage = language =>({
+  type:SET_CURRENT_LANGUAGE,
+  language
+})
+
+export const GET_LANGUAGES_SUCCESS = 'GET_LANGUAGES_SUCCESS';
+// TODO, build async actions, handle errors
 
 export const GET_QUESTION_SUCCESS = 'GET_QUESTION_SUCCESS';
-
 export const getQuestionSuccess = question => ({
   type: GET_QUESTION_SUCCESS,
   question
 })
 
+export const GET_QUESTION = 'GET_QUESTION';
 export const getQuestion = () => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/learn`, {
@@ -74,7 +81,6 @@ export const resetAnswerStatus = () => ({
 });
 
 export const NEXT_QUESTION = 'NEXT_QUESTION';
-
 export const nextQuestion = (foreignLanguage, correct) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/learn`, {
@@ -89,28 +95,22 @@ export const nextQuestion = (foreignLanguage, correct) => (dispatch, getState) =
 }
 
 export const HANDLE_STREAK_CORRECT = 'HANDLE_STREAK_CORRECT';
-
 export const handleStreakCorrect = () => ({
   type: HANDLE_STREAK_CORRECT,
-
 })
 
 export const HANDLE_STREAK_INCORRECT = 'HANDLE_STREAK_INCORRECT';
-
 export const handleStreakIncorrext = () => ({
   type: HANDLE_STREAK_INCORRECT,
-
 })
 
-export const GET_SCORES = 'GET_SCORES';
-
 export const GET_SCORES_SUCCESS = 'GET_SCORES_SUCCESS';
-
 export const getScoresSuccess = (scores) => ({
   type: GET_SCORES_SUCCESS,
   scores
 })
 
+export const GET_SCORES = 'GET_SCORES';
 export const getScores = () => (dispatch, getState) => {
   console.log('this did run');
   const authToken = getState().auth.authToken;

@@ -6,7 +6,9 @@ import {
   HANDLE_STREAK_CORRECT,
   HANDLE_STREAK_INCORRECT,
   GET_SCORES_SUCCESS,
-  REVEAL_ANSWER
+  REVEAL_ANSWER,
+  SET_CURRENT_LANGUAGE,
+  GET_LANGUAGES_SUCCESS
 } from '../actions/index.js'
 
 
@@ -19,7 +21,9 @@ const initialState = {
   correctAnswer: null,
   currentWord: 'null',
   streak: 0,
-  scores: []
+  scores: [],
+  availableLanguages: ['Czech', 'German'],
+  currentLanguage: 'German'
 }
 //  send german word and true false for right wrong
 
@@ -65,5 +69,17 @@ export const mainReducer = (state = initialState, action) => {
       scores: [...action.scores]
     })
   }
+  else if (action.type === GET_LANGUAGES_SUCCESS) {
+    return Object.assign({}, state, {
+      availableLanguages: [...action.availableLanguages]
+    })
+  }
+
+  else if (action.type === SET_CURRENT_LANGUAGE) {
+    return Object.assign({}, state, {
+      currentLanguage: action.language
+    })
+  }
+
   return state
 }
