@@ -8,9 +8,16 @@ import {
 } from '../actions/index'
 
 export class Card extends React.Component {
+	
+
+	componentDidMount() {
+		this.props.dispatch(resetAnswerStatus())
+	}
+
 	buildAndDispatchEvalObject = (userAnswer) => {
 		const wordWithAnswer = Object.assign({}, this.props.word, {
 			userAnswer,
+			subjectId: this.props.currentSubject.id
 		})
 		this.props.dispatch(evaluateAnswer(wordWithAnswer))
 	}
@@ -27,16 +34,10 @@ export class Card extends React.Component {
 
 	handleNext = () => {
 		this.props.dispatch(resetAnswerStatus());
-		this.props.dispatch(getQuestion());
+		this.props.dispatch(getQuestion(this.props.currentSubject.id));
 	}
 
-	componentWillMount() {
-		this.props.dispatch(getQuestion())
-	}
 
-	componentDidMount() {
-		this.props.dispatch(resetAnswerStatus())
-	}
 
 	render() {
 		let feedback;
@@ -47,12 +48,21 @@ export class Card extends React.Component {
 				feedback = `Wrong! The answer is ${this.props.correctAnswer.nativeLanguage}`
 			};
 		}
-		let nextButton;
+		let submitNextButton;
 		if (this.props.correctAnswer) {
-			nextButton = <button onClick={() => this.handleNext()}>Get Another!</button>
+			submitNextButton = <button type='button' onClick={() => this.handleNext()}>Get Another!</button>
 		}
-
+		else {
+			submitNextButton = <button
+			className='submit-button'
+			type="submit"
+		>
+			Submit Guess
+</button>
+		}
 		
+
+
 
 		return (
 			<div className="card">
@@ -65,18 +75,12 @@ export class Card extends React.Component {
 							name='text'
 							type='text'
 							value={this.props.answer}
-							defaultValue=''
+							// defaultValue=''
 							placeholder='answer'
 							onChange={e => this.handleChange(e.target.value)}>
 						</input>
-						<button
-							className='submit-button'
-							type="submit"
-						>
-							Submit Guess
-				</button>
+					{submitNextButton}
 					</form>
-					{nextButton}
 					<p>{feedback}</p>
 				</div>
 				<p className='word-score'>Word Score: {this.props.word.mValue}</p>
@@ -92,7 +96,9 @@ const mapStateToProps = state => ({
 	streak: state.main.streak,
 	feedback: state.main.feedback,
 	word: state.main.currentWord,
-	correctAnswer: state.main.correctAnswer
+	correctAnswer: state.main.correctAnswer,
+	subjects: state.auth.currentUser.subjects,
+	currentSubject: state.main.currentSubject
 });
 
 export default connect(mapStateToProps)(Card);

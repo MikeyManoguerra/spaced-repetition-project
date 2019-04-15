@@ -6,14 +6,18 @@ export const setAnswer = userInput => ({
   userInput
 });
 
-export const SET_CURRENT_LANGUAGE = 'SET_CURRENT_LANGUAGE';
-export const setCurrentLanguage = language =>({
-  type:SET_CURRENT_LANGUAGE,
-  language
+export const SET_CURRENT_SUBJECT = 'SET_CURRENT_SUBJECT';
+export const setCurrentSubject = subject => ({
+  type: SET_CURRENT_SUBJECT,
+  subject
 })
 
-export const GET_LANGUAGES_SUCCESS = 'GET_LANGUAGES_SUCCESS';
-// TODO, build async actions, handle errors
+
+export const GET_SUBJECTS_SUCCESS = 'GET_SUBJECTS_SUCCESS';
+export const getSubjectsSuccess = subjects => ({
+  type: GET_SUBJECTS_SUCCESS,
+  subjects
+})
 
 export const GET_QUESTION_SUCCESS = 'GET_QUESTION_SUCCESS';
 export const getQuestionSuccess = question => ({
@@ -21,10 +25,31 @@ export const getQuestionSuccess = question => ({
   question
 })
 
-export const GET_QUESTION = 'GET_QUESTION';
-export const getQuestion = () => (dispatch, getState) => {
+export const GET_AVAILABLE_SUBJECTS = 'GET_AVAILABLE_SUBJECTS';
+export const getAvailableSubjects = () => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/learn`, {
+  return fetch(`${API_BASE_URL}/learn/subjects`, {
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    })
+    .then(subjects => {
+      console.log(subjects);
+      dispatch(getSubjectsSuccess(subjects));
+    })
+}
+
+export const GET_QUESTION = 'GET_QUESTION';
+export const getQuestion = (subjectId) => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/learn/${subjectId}`, {
     headers: {
       // Provide our auth token as credentials
       Authorization: `Bearer ${authToken}`
@@ -110,6 +135,12 @@ export const getScoresSuccess = (scores) => ({
   scores
 })
 
+export const UPDATE_USER_SUBJECTS_SUCCESS = 'UPDATE_USER_SUBJECTS_SUCCESS';
+export const updateUserSubjectsSuccess = (userSubjects) => ({
+  type: UPDATE_USER_SUBJECTS_SUCCESS,
+  userSubjects
+})
+
 export const GET_SCORES = 'GET_SCORES';
 export const getScores = () => (dispatch, getState) => {
   console.log('this did run');
@@ -130,6 +161,47 @@ export const getScores = () => (dispatch, getState) => {
       dispatch(getScoresSuccess(scores));
     })
 };
+export const updateUserSubjects = () => (dispatch, getState) => {
+  console.log('this did run');
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/learn/`, {
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    })
+    .then((userSubjects) => {
+      return dispatch(updateUserSubjectsSuccess(userSubjects));
+    }).catch((err) => console.log(err))
+};
 
 
+export const newSubjectList = (availableSubject) => (dispatch, getState) => {
+  let subjectId = availableSubject.id
+  console.log('this did run');
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/learn/newSubject/${subjectId}`, {
+    method: 'POST',
+    headers: {
+      // Provide our auth token as credentials
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+    })
+    .then(() => {
+      dispatch(updateUserSubjects());
+      dispatch(setCurrentSubject(availableSubject))
+      return dispatch(getQuestion(subjectId));
+    }).catch((err) => console.log(err))
+};
 

@@ -1,41 +1,74 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  setCurrentLanguage
+  setCurrentSubject,
+  newSubjectList,
+  getQuestion
 } from '../actions/index'
 
 export class LanguageSelector extends React.Component {
 
-  selectALanguage(language){
-    this.props.dispatch(setCurrentLanguage(language))
+  constructor(props) {
+    super(props)
+    this.state = { subjectId: this.props.currentSubject.id }
+  }
+  
+
+  stageSubject(subjectId) {
+    this.setState({ subjectId: subjectId })
   }
 
+  setCurrentSubject() {
+    const subjectId = this.state.subjectId;
+    // check if user already has a list on this subject
+    const subjectOnUser = this.props.userSubjects(subject => {
+      return subject.id === subjectId;
+    })
+    if (!subjectOnUser) {
+    const availableSubject = this.props.availableSubjects.find(subject => {
+      return subject.id === subjectId;
+    })
+      //create new list for user
+      this.props.dispatch(newSubjectList(availableSubject))
+    } else {
+      // set the current subject
+      this.props.dispatch(setCurrentSubject(subjectOnUser))
+      this.props.dispatch(getQuestion(subjectId))
+    }
+  }
 
   render() {
-    const options = this.props.availableLanguages.map((language, index) =>
+    const options = this.props.availableSubjects.map((subject, index) =>
       <option
         key={index}
-        label={language}
-        value={language}>
-        {language}
+        label={subject.subject}
+        value={subject.id}>
+        {subject.subject}
       </option>);
 
+    console.log(options)
     return (
-      <select className="node-select"
-        label="Select a Language"
-        name="languageSelect"
-        value={this.props.currentLanguage}
-        options={options}
-        onChange={e => this.selectALanguage(e.target.value)}>{options}
-      </select>
+      <div>
+
+        <label className='select-label'>Select a subject to learn</label>
+        <select className="select-subject"
+          name="subjectSelect"
+          defaultValue={this.props.currentSubject}
+          options={options}
+          onChange={e => this.stageSubject(e.target.value)}>{options}
+        </select>
+        <button  className='select-button' onClick={() => this.setCurrentSubject()}>Switch Subject</button>
+      </div>
     )
   }
 }
 
 
 const mapStateToProps = state => ({
-  availableLanguages:state.main.availableLanguages,
-  currentLanguage:state.main.currentLanguage
+  availableSubjects: state.main.availableSubjects,
+  currentSubject: state.main.currentSubject,
+  currentUser: state.auth.currentUser,
+  userSubjects: state.main.userSubjects
 });
 
 export default connect(mapStateToProps)(LanguageSelector);
