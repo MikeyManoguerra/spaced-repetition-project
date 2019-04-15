@@ -9,8 +9,8 @@ const Subject = require('../models/subject')
 const router = express.Router();
 
 router.post('/', (req, res, next) => {
-  const { username, fullname, password } = req.body;
-  const requiredFields = ['username', 'password'];
+  const { username, fullname, password, subjectId } = req.body;
+  const requiredFields = ['username', 'password', 'subjectId'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
   // make sure all required fields are included
@@ -51,6 +51,8 @@ router.post('/', (req, res, next) => {
       location: nonTrimmedField
     });
   }
+
+  // TODO check subjectID valid
 
   const sizedFields = {
     username: {
@@ -98,12 +100,15 @@ router.post('/', (req, res, next) => {
     })
     .then((user) => {
       userId = user._id;
-      return Promise.all([
-        Word.find(),
-        Subject.findOne({ subject: 'german' })
-      ]);
+      return Subject.findById(subjectId);
     })
-    .then(([words, subject]) => {
+    .then((subject) => {
+
+
+// how and why to use subjectID
+
+
+
       const wordsList = words.map(word => {
         let item = {};
         item.wordId = word._id;
