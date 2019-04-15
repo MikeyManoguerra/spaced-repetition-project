@@ -6,7 +6,8 @@ const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
   fullname: { type: String },
   username: { type: String, required: true, unique: true },
-  password: { type: String, required: true } 
+  password: { type: String, required: true },
+  subjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Subject' }],
 });
 
 userSchema.set('timestamps', true);

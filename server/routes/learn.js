@@ -9,10 +9,11 @@ const passport = require('passport');
 
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
-router.get('/', (req, res, next) => {
+router.get('/:subjectId', (req, res, next) => {
   let mValue;
   const userId = req.user.id;
-  return List.findOne({ userId: userId }) // can add subject id when user has multiple lists
+  const subjectId = req.params.subjectId;
+  return List.findOne({ userId: userId, subjectId: subjectId }) // can add subject id when user has multiple lists
     .then((userList) => {
       let index = userList.head;
       const wordId = userList.words[index].wordId;
@@ -34,6 +35,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const userId = req.user.id;
   const {
+    subjectId,
     foreignLanguage,
     userAnswer,
     _id,
@@ -47,11 +49,11 @@ router.post('/', (req, res, next) => {
   let correctAnswer;
 
   // get list head , the word client just answered
-  return List.findOne({ userId: userId })
+  return List.findOne({ userId: userId, subjectId })
     .then(list => {
 
       if (!list) {
-        const err = new Error('User\'s bar german word list not found ');
+        const err = new Error('User\'s bar word list not found ');
         err.status = 404;
         return next(err);
       }

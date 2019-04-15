@@ -4,7 +4,6 @@ const express = require('express');
 const User = require('../models/user');
 const Word = require('../models/word');
 const List = require('../models/list');
-const Subject = require('../models/subject')
 
 const router = express.Router();
 
@@ -100,27 +99,23 @@ router.post('/', (req, res, next) => {
     })
     .then((user) => {
       userId = user._id;
-      return Subject.findById(subjectId);
+      return Word.findMany({ subjectId: subjectId });
     })
-    .then((subject) => {
-
-
-// how and why to use subjectID
-
-
-
+    .then((words) => {
+      let pointer = 1;
       const wordsList = words.map(word => {
         let item = {};
         item.wordId = word._id;
         item.mValue = 1;
-        item.pointer = word.pointer;
+        item.pointer = pointer === words.length ? null : pointer;
+        pointer += 1;
         return item;
       });
 
       let userOwnedList = {
         userId,
         words: wordsList,
-        subjectId: subject._id
+        subjectId,
       };
       return List.create(userOwnedList);
     })
