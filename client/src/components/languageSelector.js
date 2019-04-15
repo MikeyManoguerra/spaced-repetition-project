@@ -21,7 +21,7 @@ export class LanguageSelector extends React.Component {
   setCurrentSubject() {
     const subjectId = this.state.subjectId;
     // check if user already has a list on this subject
-    const subjectOnUser = this.props.userSubjects(subject => {
+    const subjectOnUser = this.props.userSubjects.find(subject => {
       return subject.id === subjectId;
     })
     if (!subjectOnUser) {

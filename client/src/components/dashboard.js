@@ -16,10 +16,10 @@ export class Dashboard extends React.Component {
     // current subject set in auth action success
     this.props.dispatch(getAvailableSubjects())
     return this.props.dispatch(updateUserSubjects())
-      .then(() =>{
+      .then(() => {
         this.props.dispatch(setCurrentSubject(this.props.userSubjects[0]))
         return this.props.dispatch(getQuestion(this.props.currentSubject.id))
-       })
+      })
   }
 
   logOut() {
@@ -34,8 +34,14 @@ export class Dashboard extends React.Component {
         <button onClick={() => this.logOut()}>Log out</button>
       );
     }
-    if (!this.props.currentSubject) {
+    if (!this.props.loading) {
       return <p> loading...</p>
+    }
+    let errorMessage;
+    if (this.props.error) {
+      errorMessage = <div>
+        <p>{this.props.error.message}</p>
+      </div>
     }
     else {
       return (
@@ -61,6 +67,8 @@ export class Dashboard extends React.Component {
 const mapStateToProps = state => {
   const { currentUser } = state.auth;
   return {
+    error: state.main.error,
+    loading: state.main.loading,
     streak: state.main.streak,
     currentUser: state.auth.currentUser,
     name: `${currentUser.fullname}`,
