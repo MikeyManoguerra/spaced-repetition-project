@@ -12,8 +12,8 @@ router.use('/', passport.authenticate('jwt', { session: false, failWithError: tr
 
 router.get('/', (req, res, next) => {
   let userId = req.user.id;
-  console.log(userId);
-  return User.findOne({ _id: userId })
+  
+  return User.findOne({ _id: userId }).populate('subjects')
     .then(user => {
       const userSubjects = user.subjects;
       return res.json(userSubjects);

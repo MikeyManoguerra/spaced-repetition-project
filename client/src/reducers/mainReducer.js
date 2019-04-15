@@ -23,6 +23,9 @@ import {
   UPDATE_USER_SUBJECTS_ERROR,
   NEW_SUBJECT_LIST_REQUEST,
   NEW_SUBJECT_LIST_ERROR,
+  GET_USER_SUBJECTS_SUCCESS,
+  GET_USER_SUBJECTS_REQUEST,
+  GET_USER_SUBJECTS_ERROR,
 } from '../actions/index.js'
 
 
@@ -90,6 +93,7 @@ export const mainReducer = (state = initialState, action) => {
   }
 
   else if (action.type === SET_CURRENT_SUBJECT) {
+  
     return Object.assign({}, state, {
       currentSubject: action.subject
     })
@@ -190,6 +194,24 @@ export const mainReducer = (state = initialState, action) => {
     })
   }
   else if (action.type === NEW_SUBJECT_LIST_ERROR) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    })
+  }
+  else if (action.type === GET_USER_SUBJECTS_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      userSubjects: [...action.userSubjects]
+    })
+  }
+  else if (action.type === GET_USER_SUBJECTS_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    })
+  }
+  else if (action.type === GET_USER_SUBJECTS_ERROR) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error

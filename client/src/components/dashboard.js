@@ -6,7 +6,7 @@ import { clearAuthToken } from '../local-storage';
 import Card from './wordCard';
 import LanguageSelector from './languageSelector';
 import { Link } from 'react-router-dom';
-import { getQuestion, getAvailableSubjects, setCurrentSubject, updateUserSubjects } from '../actions/index'
+import { getQuestion, getAvailableSubjects, setCurrentSubject, getUserSubjects } from '../actions/index'
 
 export class Dashboard extends React.Component {
 
@@ -15,11 +15,8 @@ export class Dashboard extends React.Component {
     // TODO, request most recently modified list instead of first in subjects array.
     // current subject set in auth action success
     this.props.dispatch(getAvailableSubjects())
-    return this.props.dispatch(updateUserSubjects())
-      .then(() => {
-        this.props.dispatch(setCurrentSubject(this.props.userSubjects[0]))
-        return this.props.dispatch(getQuestion(this.props.currentSubject.id))
-      })
+    return this.props.dispatch(getUserSubjects())
+
   }
 
   logOut() {
@@ -34,31 +31,37 @@ export class Dashboard extends React.Component {
         <button onClick={() => this.logOut()}>Log out</button>
       );
     }
-    if (!this.props.loading) {
+    if (this.props.loading) {
       return <p> loading...</p>
     }
+    let subjectSelector;
+    if (this.props.currentSubject && this.props.availableSubjects) {
+      subjectSelector = <LanguageSelector />
+    }
+
     let errorMessage;
     if (this.props.error) {
       errorMessage = <div>
         <p>{this.props.error.message}</p>
       </div>
     }
-    else {
+    if (!this.props.loading) {
       return (
-        <main role='main'>
+        
           <div className='dashboard'>
             <div className="dashboard-username-main">
               <h2 className='dashboard-welcome'>Welcome {this.props.currentUser.username}!</h2>
               <h3>Streak : {this.props.streak}</h3>
+              {errorMessage}
             </div>
             <Card bgc='#fcd000' />
             {logOutButton}
             <Link to='/scores'>
               <button>View Scores</button>
             </Link>
-            <LanguageSelector />
+            {subjectSelector}
           </div>
-        </main>
+      
       );
     }
   }
@@ -74,6 +77,7 @@ const mapStateToProps = state => {
     name: `${currentUser.fullname}`,
     loggedIn: state.auth.currentUser !== null,
     currentSubject: state.main.currentSubject,
+    availableSubjects: state.main.availableSubjects,
     userSubjects: state.main.userSubjects
   };
 };

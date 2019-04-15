@@ -9,11 +9,10 @@ export const setAnswer = userInput => ({
 });
 
 export const SET_CURRENT_SUBJECT = 'SET_CURRENT_SUBJECT';
-export const setCurrentSubject = subject => ({
+export const setCurrentSubject = (subject) => ({
   type: SET_CURRENT_SUBJECT,
   subject
 })
-
 
 export const GET_AVAILABLE_SUBJECTS_SUCCESS = 'GET_AVAILABLE_SUBJECTS_SUCCESS';
 export const getAvailableSubjectsSuccess = subjects => ({
@@ -229,8 +228,6 @@ export const getScores = () => (dispatch, getState) => {
     .catch(error => dispatch(getScoresError(error)))
 };
 
-
-
 export const updateUserSubjects = () => (dispatch, getState) => {
   dispatch(updateUserSubjectsRequest())
   const authToken = getState().auth.authToken;
@@ -244,6 +241,41 @@ export const updateUserSubjects = () => (dispatch, getState) => {
     .then((userSubjects) => {
       return dispatch(updateUserSubjectsSuccess(userSubjects));
     }).catch((error) => dispatch(updateUserSubjectsError(error)))
+};
+
+
+
+export const GET_USER_SUBJECTS_SUCCESS = 'GET_USER_SUBJECTS_SUCCESS';
+export const getUserSubjectsSuccess = (userSubjects) => ({
+  type: GET_USER_SUBJECTS_SUCCESS,
+  userSubjects
+})
+
+export const GET_USER_SUBJECTS_REQUEST = 'GET_USER_SUBJECTS_REQUEST'
+export const getUserSubjectsRequest = () => ({
+  type: GET_USER_SUBJECTS_REQUEST
+})
+export const GET_USER_SUBJECTS_ERROR = 'GET_USER_SUBJECTS_ERROR'
+export const getUserSubjectsError = (error) => ({
+  type: GET_USER_SUBJECTS_ERROR,
+  error
+})
+
+export const getUserSubjects = () => (dispatch, getState) => {
+  dispatch(getUserSubjectsRequest())
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/learn`, {
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then((userSubjects) => {
+      dispatch(getUserSubjectsSuccess(userSubjects));
+      dispatch(setCurrentSubject(userSubjects[0]))
+      return dispatch(getQuestion(userSubjects[0].id))
+    }).catch((error) => dispatch(getUserSubjectsError(error)))
 };
 
 

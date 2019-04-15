@@ -10,9 +10,16 @@ export class LanguageSelector extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { subjectId: this.props.currentSubject.id }
+    this.state = { subjectId: null }
   }
-  
+
+  componentDidMount() {
+    if (!this.props.loading) {
+      this.setState({
+        subjectId: this.props.currentSubject.id
+      })
+    }
+  }
 
   stageSubject(subjectId) {
     this.setState({ subjectId: subjectId })
@@ -25,9 +32,9 @@ export class LanguageSelector extends React.Component {
       return subject.id === subjectId;
     })
     if (!subjectOnUser) {
-    const availableSubject = this.props.availableSubjects.find(subject => {
-      return subject.id === subjectId;
-    })
+      const availableSubject = this.props.availableSubjects.find(subject => {
+        return subject.id === subjectId;
+      })
       //create new list for user
       this.props.dispatch(newSubjectList(availableSubject))
     } else {
@@ -57,7 +64,7 @@ export class LanguageSelector extends React.Component {
           options={options}
           onChange={e => this.stageSubject(e.target.value)}>{options}
         </select>
-        <button  className='select-button' onClick={() => this.setCurrentSubject()}>Switch Subject</button>
+        <button className='select-button' onClick={() => this.setCurrentSubject()}>Switch Subject</button>
       </div>
     )
   }
@@ -65,6 +72,7 @@ export class LanguageSelector extends React.Component {
 
 
 const mapStateToProps = state => ({
+  loading: state.main.loading,
   availableSubjects: state.main.availableSubjects,
   currentSubject: state.main.currentSubject,
   currentUser: state.auth.currentUser,
