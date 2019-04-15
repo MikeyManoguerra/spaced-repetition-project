@@ -5,9 +5,35 @@ const router = express.Router();
 const User = require('../models/user');
 const Word = require('../models/word');
 const List = require('../models/list');
+const Subject = require('../models/subject');
 const passport = require('passport');
 
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
+
+router.get('/', (req, res, next) => {
+  let userId = req.user.id;
+  console.log(userId);
+  return User.findOne({ _id: userId })
+    .then(user => {
+      const userSubjects = user.subjects;
+      return res.json(userSubjects);
+    })
+    .catch(err => {
+      return next(err);
+    });
+});
+
+
+router.get('/subjects', (req, res, next) => {
+  return Subject.find()
+    .then(subjects => {
+      return res.json(subjects);
+    })
+    .catch(err => {
+      return next(err);
+    });
+});
+
 
 router.get('/:subjectId', (req, res, next) => {
   let mValue;
@@ -32,6 +58,37 @@ router.get('/:subjectId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+router.post('/newSubject/:subjectId', (req, res, next) => {
+  const userId = req.user.id;
+  const subjectId = req.params.subjectId;
+
+  return Word.find({ subjectId })
+    .then((words) => {
+      let pointer = 1;
+      const newWordsForList = words.map(word => {
+        let item = {};
+        item.wordId = word.id;
+        item.mValue = 1;
+        item.pointer = pointer === words.length ? null : pointer;
+        pointer += 1;
+        return item;
+      });
+      const newList = {
+        words: [...newWordsForList],
+        userId,
+        subjectId,
+      };
+      return List.create(newList);
+    })
+    .then(() => {
+      return User.findByIdAndUpdate({ _id: userId }, { $push: { subjects: subjectId } });
+    })
+    .then(() => {
+      res.sendStatus(204).end();
+    })
+    .catch(err => next(err));
+});
+
 router.post('/', (req, res, next) => {
   const userId = req.user.id;
   const {
@@ -51,7 +108,6 @@ router.post('/', (req, res, next) => {
   // get list head , the word client just answered
   return List.findOne({ userId: userId, subjectId })
     .then(list => {
-
       if (!list) {
         const err = new Error('User\'s bar word list not found ');
         err.status = 404;
@@ -126,7 +182,7 @@ router.post('/', (req, res, next) => {
 
       head = nextPointer;
       //  update DB
-      return List.findOneAndUpdate({ _id: listId }, { $set: { words: wordList, head: head } })
+      return List.findOneAndUpdate({ _id: listId }, { $set: { words: wordList, head: head } });
     })
     .then(() => {
       const responseObject = {

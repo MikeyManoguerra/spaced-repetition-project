@@ -11,7 +11,6 @@ const localAuth = passport.authenticate('local', options);
 // Protect endpoints using JWT Strategy
 
 function createAuthToken(user) {
-  
   return jwt.sign({ user }, JWT_SECRET, {
     subject: user.username,
     expiresIn: JWT_EXPIRY

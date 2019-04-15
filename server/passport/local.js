@@ -2,10 +2,11 @@
 
 const { Strategy : LocalStrategy } = require('passport-local');
 const User = require( '../models/user');
+const Subject = require( '../models/subject');
 
 const localStrategy = new LocalStrategy((username, password, done) => {
   let user;
-  User.findOne({ username })
+  User.findOne({ username }).populate('subjects')
     .then(results => {
     
       user = results;

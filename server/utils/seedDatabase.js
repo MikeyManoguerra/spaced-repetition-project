@@ -19,6 +19,14 @@ let germanId, czechId, userId1, userId2;
 
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => mongoose.connection.db.dropDatabase())
+  .then(()=>{
+    return Promise.all([
+      User.ensureIndexes(),
+      List.ensureIndexes(),
+      Subject.ensureIndexes(),
+      Word.ensureIndexes(),      
+    ])
+  })
   .then(() => {
     return Promise.all([
       Subject.insertMany(subjects),
@@ -52,9 +60,8 @@ mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true })
     return Promise.all([
       Word.insertMany(germanWordsWithSubjectId),
       Word.insertMany(czechWordsWithSubjectId),
-      User.updateOne({ userId1 }, {$push: {subjects: czechId}}),
-      User.updateOne({ userId2 }, {$push: {subjects: germanId}}),
-
+      User.findByIdAndUpdate({ _id: userId1 }, { $set: { subjects: [czechId] } }),
+      User.findByIdAndUpdate({ _id: userId2 }, { $set: { subjects: [germanId] } }),
     ]);
   })
   .then(([germanList, czechList]) => {
@@ -74,7 +81,7 @@ mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true })
       let item = {};
       item.wordId = word.id;
       item.mValue = 1;
-      item.pointer2 = pointer2 === czechList.length ? null : pointer2;
+      item.pointer = pointer2 === czechList.length ? null : pointer2;
       pointer2 += 1;
       return item;
     });

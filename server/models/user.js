@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   subjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Subject' }],
 });
 
+// { type: Array, default: undefined }
 userSchema.set('timestamps', true);
 
 userSchema.set('toJSON', {
