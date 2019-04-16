@@ -26,6 +26,7 @@ import {
   GET_USER_SUBJECTS_SUCCESS,
   GET_USER_SUBJECTS_REQUEST,
   GET_USER_SUBJECTS_ERROR,
+  STAGE_NEW_SUBJECT,
 } from '../actions/index.js'
 
 
@@ -43,7 +44,8 @@ const initialState = {
   userSubjects: [],
   currentSubject: null,
   loading: false,
-  error: null
+  error: null,
+  stagedSubject: null,
 }
 
 
@@ -76,14 +78,14 @@ export const mainReducer = (state = initialState, action) => {
   else if (action.type === HANDLE_STREAK_CORRECT) {
     return Object.assign({}, state, {
       streak: state.streak += 1,
-      loading:false
+      loading: false
     })
   }
 
   else if (action.type === HANDLE_STREAK_INCORRECT) {
     return Object.assign({}, state, {
       streak: 0,
-      loading:false
+      loading: false
     })
   }
 
@@ -95,7 +97,7 @@ export const mainReducer = (state = initialState, action) => {
   }
 
   else if (action.type === SET_CURRENT_SUBJECT) {
-  
+
     return Object.assign({}, state, {
       currentSubject: action.subject
     })
@@ -217,6 +219,11 @@ export const mainReducer = (state = initialState, action) => {
     return Object.assign({}, state, {
       loading: false,
       error: action.error
+    })
+  }
+  else if (action.type === STAGE_NEW_SUBJECT) {
+    return Object.assign({}, state, {
+      stagedSubject: action.subjectId
     })
   }
 

@@ -8,7 +8,7 @@ import {
 } from '../actions/index'
 
 export class Card extends React.Component {
-	
+
 
 	componentDidMount() {
 		this.props.dispatch(resetAnswerStatus())
@@ -49,19 +49,22 @@ export class Card extends React.Component {
 			};
 		}
 		let submitButton;
-		let nextButton
+		let nextButton;
+		let disabled;
 		if (this.props.correctAnswer) {
 			nextButton = <button type='button' onClick={() => this.handleNext()}>Get Another!</button>
+			disabled = true
 		}
 		else {
 			submitButton = <button
-			className='submit-button'
-			type="submit"
-		>
-			Submit Guess
+				className='submit-button'
+				type="submit"
+			>
+				Submit Guess
 </button>
+			disabled = false
 		}
-		
+
 		return (
 			<div className="card">
 				<div className='game-container'>
@@ -73,11 +76,11 @@ export class Card extends React.Component {
 							name='text'
 							type='text'
 							value={this.props.answer}
-							// defaultValue=''
+							disabled={disabled}
 							placeholder='answer'
 							onChange={e => this.handleChange(e.target.value)}>
 						</input>
-					{submitButton}
+						{submitButton}
 					</form>
 					{nextButton}
 					<p>{feedback}</p>

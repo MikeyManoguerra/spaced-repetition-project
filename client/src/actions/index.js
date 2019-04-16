@@ -8,6 +8,12 @@ export const setAnswer = userInput => ({
   userInput
 });
 
+export const STAGE_NEW_SUBJECT = 'STAGE_NEW_SUBJECT';
+export const stageNewSubject = (subjectId) => ({
+  type: STAGE_NEW_SUBJECT,
+  subjectId
+})
+
 export const SET_CURRENT_SUBJECT = 'SET_CURRENT_SUBJECT';
 export const setCurrentSubject = (subject) => ({
   type: SET_CURRENT_SUBJECT,
@@ -124,6 +130,22 @@ export const newSubjectListError = (error) => ({
   error
 })
 
+export const GET_USER_SUBJECTS_SUCCESS = 'GET_USER_SUBJECTS_SUCCESS';
+export const getUserSubjectsSuccess = (userSubjects) => ({
+  type: GET_USER_SUBJECTS_SUCCESS,
+  userSubjects
+})
+
+export const GET_USER_SUBJECTS_REQUEST = 'GET_USER_SUBJECTS_REQUEST'
+export const getUserSubjectsRequest = () => ({
+  type: GET_USER_SUBJECTS_REQUEST
+})
+export const GET_USER_SUBJECTS_ERROR = 'GET_USER_SUBJECTS_ERROR'
+export const getUserSubjectsError = (error) => ({
+  type: GET_USER_SUBJECTS_ERROR,
+  error
+})
+
 
 export const EVALUATE_ANSWER = 'EVALUATE_ANSWER';
 export const evaluateAnswer = (userAnswerObject) => (dispatch, getState) => {
@@ -152,11 +174,11 @@ export const evaluateAnswer = (userAnswerObject) => (dispatch, getState) => {
 
 export const getAvailableSubjects = () => (dispatch, getState) => {
   dispatch(evaluateAnswerRequest())
-  const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/learn/subjects`, {
-    headers: {
-      Authorization: `Bearer ${authToken}`
-    }
+  // const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/subjects`, {
+    // headers: {
+    //   Authorization: `Bearer ${authToken}`
+    // }
   })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
@@ -220,7 +242,7 @@ export const getScores = (subjectId) => (dispatch, getState) => {
 export const updateUserSubjects = () => (dispatch, getState) => {
   dispatch(updateUserSubjectsRequest())
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/learn/`, {
+  return fetch(`${API_BASE_URL}/subjects/userSubjects`, {
     headers: {
       Authorization: `Bearer ${authToken}`
     }
@@ -233,27 +255,12 @@ export const updateUserSubjects = () => (dispatch, getState) => {
 };
 
 
-
-export const GET_USER_SUBJECTS_SUCCESS = 'GET_USER_SUBJECTS_SUCCESS';
-export const getUserSubjectsSuccess = (userSubjects) => ({
-  type: GET_USER_SUBJECTS_SUCCESS,
-  userSubjects
-})
-
-export const GET_USER_SUBJECTS_REQUEST = 'GET_USER_SUBJECTS_REQUEST'
-export const getUserSubjectsRequest = () => ({
-  type: GET_USER_SUBJECTS_REQUEST
-})
-export const GET_USER_SUBJECTS_ERROR = 'GET_USER_SUBJECTS_ERROR'
-export const getUserSubjectsError = (error) => ({
-  type: GET_USER_SUBJECTS_ERROR,
-  error
-})
-
+// TODO, request most recently modified list instead of first in subjects array.
+// current subject set in auth action success
 export const getUserSubjects = () => (dispatch, getState) => {
   dispatch(getUserSubjectsRequest())
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/learn`, {
+  return fetch(`${API_BASE_URL}/subjects/userSubjects`, {
     headers: {
       Authorization: `Bearer ${authToken}`
     }
@@ -273,14 +280,13 @@ export const newSubjectList = (availableSubject) => (dispatch, getState) => {
   let subjectId = availableSubject.id
 
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/learn/newSubject/${subjectId}`, {
+  return fetch(`${API_BASE_URL}/subjects/${subjectId}`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${authToken}`
     }
   })
     .then(res => normalizeResponseErrors(res))
-    .then(res => res.json())
     .then(() => {
       dispatch(updateUserSubjects());
       dispatch(setCurrentSubject(availableSubject))

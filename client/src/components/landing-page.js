@@ -13,8 +13,8 @@ export function LandingPage(props) {
     return (
         <div>
             <div className="home">
-                <p className='description'>German for friday night will teach you *just* enough German to get your drink on
-                    through the power of spaced repetition.
+                <p className='description'>Friday night knowledge will teach 
+             teach you good words to know in multiple languages when you are at the bar.
             </p>
                 <LoginForm />
                 <Link to="/register">Register</Link>

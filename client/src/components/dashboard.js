@@ -12,11 +12,10 @@ export class Dashboard extends React.Component {
 
 
   componentDidMount() {
-    // TODO, request most recently modified list instead of first in subjects array.
-    // current subject set in auth action success
     this.props.dispatch(getAvailableSubjects())
-    return this.props.dispatch(getUserSubjects())
-
+    if (!this.props.userSubjects.length) {
+      return this.props.dispatch(getUserSubjects())
+    }
   }
 
   logOut() {
@@ -28,7 +27,7 @@ export class Dashboard extends React.Component {
     let logOutButton;
     if (this.props.loggedIn) {
       logOutButton = (
-        <button onClick={() => this.logOut()}>Log out</button>
+        <button type='button' onClick={() => this.logOut()}>Log out</button>
       );
     }
     let subjectSelector;
@@ -36,23 +35,26 @@ export class Dashboard extends React.Component {
       subjectSelector = <LanguageSelector />
     }
 
-    let errorMessage;
+    let information;
     if (this.props.error) {
-      errorMessage = <div>
-        <p>{this.props.error.message}</p>
+      information = <div>
+        <h3>{this.props.error.message}</h3>
       </div>
+    }
+    else{
+      information = <h3>Streak : {this.props.streak}</h3>
+  
     }
     return (
       <div className='dashboard'>
         <div className="dashboard-username-main">
           <h2 className='dashboard-welcome'>Welcome {this.props.currentUser.username}!</h2>
-          <h3>Streak : {this.props.streak}</h3>
-          {errorMessage}
+         {information}
         </div>
         <Card bgc='#fcd000' />
         {logOutButton}
         <Link to='/scores'>
-          <button>View Scores</button>
+          <button type='button'>View Scores</button>
         </Link>
         {subjectSelector}
       </div>

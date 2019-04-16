@@ -19,7 +19,7 @@ router.get('/:subjectId', (req, res, next) => {
       let wordsPlusScores = [];
       userList.words.forEach(userWord => {
         words.forEach(word => {
-          if (userWord.wordId === (word.id)) {
+          if (userWord.wordId.toString() === word.id.toString()) {
             let wordWithValue = {
               foreignLanguage: word.foreignLanguage,
               mValue: userWord.mValue

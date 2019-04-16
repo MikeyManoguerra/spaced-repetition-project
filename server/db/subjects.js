@@ -4,9 +4,6 @@ const subjects = [
   },
   {
     'subject': 'german'
-  },
-  {
-    'subject': 'knots'
   }
 ];
 

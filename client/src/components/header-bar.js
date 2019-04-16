@@ -21,7 +21,7 @@ export class HeaderBar extends React.Component {
       if (this.props.currentSubject.subject === 'german') {
         return (
           <header role='banner' className="header-bar">
-            <h1 className='title'>German for Friday Night</h1>
+            <h1 className='german-title'>German for Friday Night</h1>
           </header>
         );
       }
@@ -33,11 +33,21 @@ export class HeaderBar extends React.Component {
           </header>
         );
       }
+      else {
+        return (
+          <header role='banner' className="header-bar">
+            <h1 className='title'>{this.props.currentSubject.subject} for Friday Night</h1>
+          </header>
+        );
+      }
     }
-    else{
-      return <h1>hi</h1>
+    else {
+      return <h1 className='title'>Loading</h1>
     }
+
   }
+
+
 }
 
 const mapStateToProps = state => ({

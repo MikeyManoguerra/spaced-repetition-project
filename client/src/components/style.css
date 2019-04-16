@@ -9,12 +9,16 @@ main{
   height: 100%;
   padding:5px;
 }
-
 .title{
-  background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+  color: #fff;
+}
+
+.german-title{
+  /* background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
   background: -o-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -o-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
   background: -moz-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -moz-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
-  background: linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+  background: linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #dd0000 66%, #ffc608 66%); */
+  background-color: #ffc608;
   color: white;
   height: 100%;
   margin-top: 0;
@@ -122,7 +126,8 @@ body{
   padding-bottom: 3px;
   border-radius: 5px;
   margin-bottom: 5px;
-  background-color: #ffc608;
+  background-color: #dd0000;
+  color: #fff;
 }
 
 .dashboard-welcome{

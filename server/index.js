@@ -15,7 +15,7 @@ const authRouter = require('./routes/auth');
 const usersRouter = require('./routes/users');
 const learnRouter = require('./routes/learn');
 const scoreRouter = require('./routes/score');
-
+const subjectsRouter = require('./routes/subjects');
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
@@ -33,9 +33,9 @@ app.use(
 
 app.use(
   cors(
-  //   {
-  //   origin: CLIENT_ORIGIN
-  // }
+    //   {
+    //   origin: CLIENT_ORIGIN
+    // }
   )
 );
 
@@ -43,6 +43,7 @@ app.use('/api', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/learn', learnRouter);
 app.use('/api/score', scoreRouter);
+app.use('/api/subjects', subjectsRouter);
 
 console.log('index here');
 // Custom 404 Not Found route handler

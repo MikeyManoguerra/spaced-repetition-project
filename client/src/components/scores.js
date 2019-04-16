@@ -23,7 +23,7 @@ export class ScorePage extends React.Component {
         </div>
         <ul className='score-list'>{list}</ul>
         <Link to='/dashboard'>
-          <button>Back to dashboard</button>
+          <button type='button'>Back to dashboard</button>
         </Link>
       </div>
     );
