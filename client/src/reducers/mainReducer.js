@@ -75,13 +75,15 @@ export const mainReducer = (state = initialState, action) => {
 
   else if (action.type === HANDLE_STREAK_CORRECT) {
     return Object.assign({}, state, {
-      streak: state.streak += 1
+      streak: state.streak += 1,
+      loading:false
     })
   }
 
   else if (action.type === HANDLE_STREAK_INCORRECT) {
     return Object.assign({}, state, {
-      streak: 0
+      streak: 0,
+      loading:false
     })
   }
 

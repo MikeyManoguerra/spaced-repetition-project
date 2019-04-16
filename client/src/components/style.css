@@ -20,6 +20,13 @@ main{
   margin-top: 0;
   margin-bottom: 0px;
 }
+.czech-title{
+background-color: blue;
+  color: white;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0px;
+}
 
 .home{
   width: 50%;

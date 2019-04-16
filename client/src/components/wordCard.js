@@ -48,12 +48,13 @@ export class Card extends React.Component {
 				feedback = `Wrong! The answer is ${this.props.correctAnswer.nativeLanguage}`
 			};
 		}
-		let submitNextButton;
+		let submitButton;
+		let nextButton
 		if (this.props.correctAnswer) {
-			submitNextButton = <button type='button' onClick={() => this.handleNext()}>Get Another!</button>
+			nextButton = <button type='button' onClick={() => this.handleNext()}>Get Another!</button>
 		}
 		else {
-			submitNextButton = <button
+			submitButton = <button
 			className='submit-button'
 			type="submit"
 		>
@@ -61,9 +62,6 @@ export class Card extends React.Component {
 </button>
 		}
 		
-
-
-
 		return (
 			<div className="card">
 				<div className='game-container'>
@@ -79,8 +77,9 @@ export class Card extends React.Component {
 							placeholder='answer'
 							onChange={e => this.handleChange(e.target.value)}>
 						</input>
-					{submitNextButton}
+					{submitButton}
 					</form>
+					{nextButton}
 					<p>{feedback}</p>
 				</div>
 				<p className='word-score'>Word Score: {this.props.word.mValue}</p>

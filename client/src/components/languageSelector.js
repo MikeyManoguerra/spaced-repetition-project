@@ -10,18 +10,12 @@ export class LanguageSelector extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { subjectId: null }
-  }
-
-  componentDidMount() {
-    if (!this.props.loading) {
-      this.setState({
-        subjectId: this.props.currentSubject.id
-      })
-    }
+    this.state = { subjectId: this.props.currentSubject.id }
   }
 
   stageSubject(subjectId) {
+
+    console.log(subjectId)
     this.setState({ subjectId: subjectId })
   }
 
@@ -53,20 +47,25 @@ export class LanguageSelector extends React.Component {
         {subject.subject}
       </option>);
 
-    console.log(options)
-    return (
-      <div>
+    if (this.props.loading) {
+      return <p> loading...</p>
+    }
 
-        <label className='select-label'>Select a subject to learn</label>
-        <select className="select-subject"
-          name="subjectSelect"
-          defaultValue={this.props.currentSubject}
-          options={options}
-          onChange={e => this.stageSubject(e.target.value)}>{options}
-        </select>
-        <button className='select-button' onClick={() => this.setCurrentSubject()}>Switch Subject</button>
-      </div>
-    )
+    else {
+      return (
+        <div>
+
+          <label className='select-label'>Select a subject to learn</label>
+          <select className="select-subject"
+            name="subjectSelect"
+            value={this.state.subjectId}
+            options={options}
+            onChange={e => this.stageSubject(e.target.value)}>{options}
+          </select>
+          <button className='select-button' onClick={() => this.setCurrentSubject()}>Switch Subject</button>
+        </div>
+      )
+    }
   }
 }
 

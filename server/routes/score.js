@@ -8,17 +8,18 @@ const passport = require('passport');
 
 router.use('/', passport.authenticate('jwt', { session: false, failWithError: true }));
 
-router.get('/', (req, res, next) => {
+router.get('/:subjectId', (req, res, next) => {
   const userId = req.user.id;
+  const subjectId = req.params.subjectId;
   return Promise.all([
-    List.findOne({ userId }),
-    Word.find()
+    List.findOne({ userId: userId, subjectId: subjectId }),
+    Word.find({ subjectId: subjectId })
   ])
     .then(([userList, words]) => {
       let wordsPlusScores = [];
       userList.words.forEach(userWord => {
         words.forEach(word => {
-          if (userWord.wordId.equals(word.id)) {
+          if (userWord.wordId === (word.id)) {
             let wordWithValue = {
               foreignLanguage: word.foreignLanguage,
               mValue: userWord.mValue
@@ -27,7 +28,6 @@ router.get('/', (req, res, next) => {
           }
         });
       });
-      console.log(wordsPlusScores)
       return res.json(wordsPlusScores);
     })
     .catch(err => next(err));

@@ -5,7 +5,7 @@ import { getScores } from '../actions/index'
 export class ScorePage extends React.Component {
 
   componentDidMount() {
-    this.props.dispatch(getScores())
+    this.props.dispatch(getScores(this.props.currentSubject.id))
   }
 
   render() {
@@ -34,7 +34,8 @@ const mapStateToProps = state => {
   return {
     main: state.main,
     username: state.auth.currentUser.username,
-    scores: state.main.scores
+    scores: state.main.scores,
+    currentSubject: state.main.currentSubject
   };
 };
 

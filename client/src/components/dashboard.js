@@ -31,9 +31,6 @@ export class Dashboard extends React.Component {
         <button onClick={() => this.logOut()}>Log out</button>
       );
     }
-    if (this.props.loading) {
-      return <p> loading...</p>
-    }
     let subjectSelector;
     if (this.props.currentSubject && this.props.availableSubjects) {
       subjectSelector = <LanguageSelector />
@@ -45,26 +42,24 @@ export class Dashboard extends React.Component {
         <p>{this.props.error.message}</p>
       </div>
     }
-    if (!this.props.loading) {
-      return (
-        
-          <div className='dashboard'>
-            <div className="dashboard-username-main">
-              <h2 className='dashboard-welcome'>Welcome {this.props.currentUser.username}!</h2>
-              <h3>Streak : {this.props.streak}</h3>
-              {errorMessage}
-            </div>
-            <Card bgc='#fcd000' />
-            {logOutButton}
-            <Link to='/scores'>
-              <button>View Scores</button>
-            </Link>
-            {subjectSelector}
-          </div>
-      
-      );
-    }
+    return (
+      <div className='dashboard'>
+        <div className="dashboard-username-main">
+          <h2 className='dashboard-welcome'>Welcome {this.props.currentUser.username}!</h2>
+          <h3>Streak : {this.props.streak}</h3>
+          {errorMessage}
+        </div>
+        <Card bgc='#fcd000' />
+        {logOutButton}
+        <Link to='/scores'>
+          <button>View Scores</button>
+        </Link>
+        {subjectSelector}
+      </div>
+
+    );
   }
+
 }
 
 const mapStateToProps = state => {

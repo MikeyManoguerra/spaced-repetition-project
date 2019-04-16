@@ -93,13 +93,14 @@ router.post('/', (req, res, next) => {
       const newUser = {
         username,
         password: digest,
-        fullname: fullname ? fullname.trim() : ''
+        fullname: fullname ? fullname.trim() : '',
+        subjects: [subjectId]
       };
       return User.create(newUser);
     })
     .then((user) => {
       userId = user._id;
-      return Word.findMany({ subjectId: subjectId });
+      return Word.find({ subjectId: subjectId });
     })
     .then((words) => {
       let pointer = 1;
@@ -114,7 +115,7 @@ router.post('/', (req, res, next) => {
 
       let userOwnedList = {
         userId,
-        words: wordsList,
+        words: [...wordsList],
         subjectId,
       };
       return List.create(userOwnedList);

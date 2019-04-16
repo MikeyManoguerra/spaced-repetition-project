@@ -150,11 +150,6 @@ export const evaluateAnswer = (userAnswerObject) => (dispatch, getState) => {
     })
 }
 
-
-
-
-
-
 export const getAvailableSubjects = () => (dispatch, getState) => {
   dispatch(evaluateAnswerRequest())
   const authToken = getState().auth.authToken;
@@ -171,8 +166,6 @@ export const getAvailableSubjects = () => (dispatch, getState) => {
     .catch(error => dispatch(evaluateAnswerError(error)))
 }
 
-
-
 export const getQuestion = (subjectId) => (dispatch, getState) => {
   dispatch(getQuestionRequest())
   const authToken = getState().auth.authToken;
@@ -188,10 +181,6 @@ export const getQuestion = (subjectId) => (dispatch, getState) => {
     })
     .catch(error => dispatch(getQuestionError(error)))
 }
-
-
-
-
 
 export const nextQuestion = (foreignLanguage, correct) => (dispatch, getState) => {
   dispatch(nextQuestionRequest())
@@ -212,10 +201,10 @@ export const nextQuestion = (foreignLanguage, correct) => (dispatch, getState) =
 
 
 
-export const getScores = () => (dispatch, getState) => {
+export const getScores = (subjectId) => (dispatch, getState) => {
   dispatch(getScoresRequest())
   const authToken = getState().auth.authToken;
-  return fetch(`${API_BASE_URL}/score`, {
+  return fetch(`${API_BASE_URL}/score/${subjectId}`, {
     headers: {
       Authorization: `Bearer ${authToken}`
     }
