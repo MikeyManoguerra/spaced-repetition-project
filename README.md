@@ -1,3 +1,24 @@
+# Friday Night German Server
+
+Client for the app can be found here.
+
+https://github.com/thinkful-ei27/Spaced-rep-client-Tyler-Mikey
+
+### Technologies:
+
+MongoDB
+Mongoose
+Express
+Node
+JWT
+
+### Authors:
+
+Mikey Manoguerra
+
+Tyler Crabb
+
+
 German for Friday Night by Mikey Manoguerra and Tyler Crabb. Learn useful German words for the bar through the power of linkied lists and spaced repetition 
 
 ## App deployed at
