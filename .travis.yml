@@ -4,3 +4,4 @@ services: mongodb
 branches:
   only:
     - master
+before_script: cd server && npm i
