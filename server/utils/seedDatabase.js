@@ -4,7 +4,7 @@ console.log('hi');
 
 const mongoose = require('mongoose');
 
-const { DATABASE_URL } = require('../config');
+// const { DATABASE_URL } = require('../config');
 const Word = require('../models/word');
 const User = require('../models/user');
 const List = require('../models/list');

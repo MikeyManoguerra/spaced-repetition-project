@@ -4,11 +4,11 @@ console.log('hi');
 
 const mongoose = require('mongoose');
 
-const { DATABASE_URL } = require('../config');
+// const { DATABASE_URL } = require('../config');
 const Word = require('../models/word');
 const Subject = require('../models/subject');
 
-const { newWords, subjects } =require('../db/hungarian.js')
+// const { newWords, subjects } =require('../db/croatian.js')
 
 
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true })
@@ -18,7 +18,7 @@ mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true })
   .then((subjectList) => {
     let subjectId
     subjectList.forEach(subject => {
-      if (subject.subject === 'hungarian') { //insert name of new subject here;
+      if (subject.subject === '') { //insert name of new subject here;
         subjectId = subject._id;
       }
     });

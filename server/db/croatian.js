@@ -1,54 +1,54 @@
 const newWords = [
   {
     'foreignLanguage': 'bolest hlavy',
-    'nativeLanguage': 'headache',
+    'nativeLanguage': 'glavobolja',
     'pointer': 1
   },
   {
-    'foreignLanguage': 'Na zdraví',
+    'foreignLanguage': 'živjeli',
     'nativeLanguage': 'cheers',
     'pointer': 2
   },
   {
-    'foreignLanguage': 'nápoj',
+    'foreignLanguage': 'piće',
     'nativeLanguage': 'drink',
     'pointer': 3
   },
   {
-    'foreignLanguage': 'Barová židle',
+    'foreignLanguage': 'barska stolica',
     'nativeLanguage': 'barstool',
     'pointer': 4
   },
   {
-    'foreignLanguage': 'houskový knedlík',
-    'nativeLanguage': 'bread dumplings',
+    'foreignLanguage': 'grah',
+    'nativeLanguage': 'bean soup',
     'pointer': 5
   },
   {
-    'foreignLanguage': 'Děkuji',
+    'foreignLanguage': 'Hvala vam',
     'nativeLanguage': 'thank you',
     'pointer': 6
 
   },
   {
     'foreignLanguage': 'další, prosím',
-    'nativeLanguage': 'another, please',
+    'nativeLanguage': 'drugi, molim',
     'pointer': 7
 
   },
   {
-    'foreignLanguage': 'koupelna',
+    'foreignLanguage': 'kupaonica',
     'nativeLanguage': 'bathroom',
     'pointer': 8
 
   },
   {
-    'foreignLanguage': 'prázdný',
+    'foreignLanguage': 'prazan',
     'nativeLanguage': 'empty',
     'pointer': 9
   },
   {
-    'foreignLanguage': 'taxi',
+    'foreignLanguage': 'taksi',
     'nativeLanguage': 'taxi',
     'pointer': 10
   },
@@ -58,12 +58,12 @@ const newWords = [
     'pointer': 11
   },
   {
-    'foreignLanguage': 'náplň',
+    'foreignLanguage': 'ponovno punjenje',
     'nativeLanguage': 'refill',
     'pointer': 12
   },
   {
-    'foreignLanguage': 'opilý',
+    'foreignLanguage': 'pijan',
     'nativeLanguage': 'drunk',
     'pointer': 13
   },
@@ -73,33 +73,33 @@ const newWords = [
     'pointer': 14
   },
   {
-    'foreignLanguage': 'mám žízeň',
+    'foreignLanguage': 'žedan sam',
     'nativeLanguage': 'i am thirsty',
     'pointer': 15
   },
   {
-    'foreignLanguage': 'měli byste jít domů',
+    'foreignLanguage': 'trebala bi ići kući',
     'nativeLanguage': 'you should walk home',
     'pointer': 16
   },
   {
-    'foreignLanguage': 'mám hlad',
+    'foreignLanguage': 'gladan sam',
     'nativeLanguage': 'i am hungry',
     'pointer': 17
   },
   {
-    'foreignLanguage': 'klopýtnutí',
+    'foreignLanguage': 'posrnuti',
     'nativeLanguage': 'stumble',
     'pointer': 18
   },
   {
-    'foreignLanguage': 'Jak se jmenuješ?',
+    'foreignLanguage': 'Kako se zoveš?',
     'nativeLanguage': 'what is your name?',
     'pointer': 19
   },
   {
     'foreignLanguage': 'Jste svobodný',
-    'nativeLanguage': 'are you single?',
+    'nativeLanguage': 'jesi li slobodan?',
     'pointer': null
   }
 
