@@ -5,7 +5,7 @@ import { API_BASE_URL } from '../config';
 
 import { normalizeResponseErrors } from './utils';
 import { saveAuthToken, clearAuthToken } from '../local-storage';
-import {  updateUserSubjectsSuccess } from './index'
+
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({

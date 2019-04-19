@@ -17,37 +17,18 @@ export class HeaderBar extends React.Component {
       );
     }
     if (this.props.currentSubject) {
-
-      if (this.props.currentSubject.subject === 'german') {
+      let subject = this.props.currentSubject.subject.charAt(0).toUpperCase() + this.props.currentSubject.subject.slice(1)
         return (
           <header role='banner' className="header-bar">
-            <h1 className='german-title'>German for Friday Night</h1>
+            <h1 className='title'>{subject} for Friday Night</h1>
           </header>
         );
       }
-
-      if (this.props.currentSubject.subject === 'czech') {
-        return (
-          <header role='banner' className="header-bar">
-            <h1 className='czech-title'>Czech for Friday Night</h1>
-          </header>
-        );
-      }
-      else {
-        return (
-          <header role='banner' className="header-bar">
-            <h1 className='title'>{this.props.currentSubject.subject} for Friday Night</h1>
-          </header>
-        );
-      }
-    }
     else {
       return <h1 className='title'>Loading</h1>
     }
 
   }
-
-
 }
 
 const mapStateToProps = state => ({

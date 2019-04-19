@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
 import { registerUser } from '../actions/users';
-import { login } from '../actions/auth';
 import Input from './input';
 import { connect } from 'react-redux'
 import { required, nonEmpty, matches, length, isTrimmed } from '../validators';
@@ -22,10 +21,14 @@ export class RegistrationForm extends React.Component {
     const user = { username, password, fullname, subjectId };
     return this.props
       .dispatch(registerUser(user))
-      .then(() => this.props.dispatch(login(username, password)));
+      
   }
-
+s
   render() {
+    let errorMessage;
+    if (this.props.errorMessage) {
+      errorMessage = (<div><p className='form-error'>{this.props.errorMessage.message}</p></div>)
+    }
     let options;
     if (this.props.loading) {
       options =
@@ -36,16 +39,16 @@ export class RegistrationForm extends React.Component {
     if (this.props.availableSubjects.length) {
       options = this.props.availableSubjects.map((subject, index) =>
         <option
-          key={index}
+          key={index + 1}
           label={subject.subject}
           value={subject.id}>
           {subject.subject}
         </option>);
-      options.unshift(<option
+      options.unshift(<option key={0}
       >
         pick one
         </option>)
-     
+
     }
     return (
       <form
@@ -53,6 +56,7 @@ export class RegistrationForm extends React.Component {
         onSubmit={this.props.handleSubmit(values =>
           this.onSubmit(values)
         )}>
+        {errorMessage}
         <label htmlFor="fullname">Full Name</label>
         <Field component={Input} type="text" name="fullname" />
         <label htmlFor="username">Username</label>
@@ -100,7 +104,8 @@ export class RegistrationForm extends React.Component {
 
 const mapStateToProps = state => ({
   loading: state.main.loading,
-  availableSubjects: state.main.availableSubjects
+  availableSubjects: state.main.availableSubjects,
+  errorMessage: state.main.error
 });
 
 

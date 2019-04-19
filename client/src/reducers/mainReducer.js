@@ -27,8 +27,12 @@ import {
   GET_USER_SUBJECTS_REQUEST,
   GET_USER_SUBJECTS_ERROR,
   STAGE_NEW_SUBJECT,
+
 } from '../actions/index.js'
 
+import {
+  REGISTER_USER_ERROR, REGISTER_USER_REQUEST
+} from '../actions/users'
 
 
 
@@ -45,7 +49,7 @@ const initialState = {
   currentSubject: null,
   loading: false,
   error: null,
-  stagedSubject: null,
+  stagedSubject: '',
 }
 
 
@@ -224,6 +228,16 @@ export const mainReducer = (state = initialState, action) => {
   else if (action.type === STAGE_NEW_SUBJECT) {
     return Object.assign({}, state, {
       stagedSubject: action.subjectId
+    })
+  }
+  else if (action.type === REGISTER_USER_ERROR) {
+    return Object.assign({}, state, {
+      error: action.error
+    })
+  }
+  else if (action.type === REGISTER_USER_REQUEST) {
+    return Object.assign({}, state, {
+      error: null
     })
   }
 

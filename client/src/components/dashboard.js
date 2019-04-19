@@ -6,7 +6,7 @@ import { clearAuthToken } from '../local-storage';
 import Card from './wordCard';
 import LanguageSelector from './languageSelector';
 import { Link } from 'react-router-dom';
-import { getQuestion, getAvailableSubjects, setCurrentSubject, getUserSubjects } from '../actions/index'
+import {  getAvailableSubjects,  getUserSubjects } from '../actions/index'
 
 export class Dashboard extends React.Component {
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Route, withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route, withRouter } from 'react-router-dom';
 import Dashboard from './dashboard'
 import HeaderBar from './header-bar';
-import  ScorePage  from './scores';
+import ScorePage from './scores';
 import LandingPage from './landing-page';
 import RegistrationPage from './registration-page';
-import {refreshAuthToken} from '../actions/auth';
+import { refreshAuthToken } from '../actions/auth';
 import './style.css'
 
 export class App extends React.Component {
@@ -41,13 +41,15 @@ export class App extends React.Component {
 
     render() {
         return (
-            <div className="app">
-                <HeaderBar />
-                <Route exact path="/" component={LandingPage} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/register" component={RegistrationPage} />
-                <Route exact path="/scores" component={ScorePage} />
-            </div>
+            <main>
+                <div className="app">
+                    <HeaderBar />
+                    <Route exact path="/" component={LandingPage} />
+                    <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact path="/register" component={RegistrationPage} />
+                    <Route exact path="/scores" component={ScorePage} />
+                </div>
+            </main>
         );
     }
 }

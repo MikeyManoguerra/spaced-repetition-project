@@ -12,6 +12,10 @@ main{
 .title{
   color: #fff;
 }
+.form-error, .form-warning{
+  font-weight: bold;
+  color: red;
+}
 
 .german-title{
   /* background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
@@ -33,7 +37,7 @@ background-color: blue;
 }
 
 .home{
-  width: 50%;
+  max-width: 500px;
   background-color: white;
   padding-bottom: 10px;
   padding-left: 10px;
