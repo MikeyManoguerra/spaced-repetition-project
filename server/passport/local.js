@@ -6,6 +6,7 @@ const Subject = require( '../models/subject');
 
 const localStrategy = new LocalStrategy((username, password, done) => {
   let user;
+  username = username.toLowerCase();
   User.findOne({ username }).populate('subjects')
     .then(results => {
     

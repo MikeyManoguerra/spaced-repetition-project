@@ -39,7 +39,7 @@ module.exports = mongoose.model('User', userSchema);
 
 
 
-// const newHash = 'kaleQueen9';
+// const newHash = 'vocabularytime';
 // function getHash(newHash) {
 //   return bcrypt.hash(newHash, 10)
 //     .then(res => console.log(res));

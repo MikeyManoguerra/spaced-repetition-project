@@ -91,7 +91,7 @@ router.post('/', (req, res, next) => {
   return User.hashPassword(password)
     .then(digest => {
       const newUser = {
-        username,
+        username: username.toLowerCase(),
         password: digest,
         fullname: fullname ? fullname.trim() : '',
         subjects: [subjectId]
@@ -121,7 +121,6 @@ router.post('/', (req, res, next) => {
       return List.create(userOwnedList);
     })
     .then(result => {
-      console.log(result);
       return res.status(201).location(`http://${req.headers.host}/api/users/${result.id}`).json(result);
     })
     .catch(err => {
