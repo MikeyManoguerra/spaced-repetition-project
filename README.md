@@ -23,40 +23,164 @@ Redux Router
 
 ### API Documentation
 
+##### GET ```api/learn/:subjectId
+
+Finds user's list by subjectId and returns the word the current word on that list, the list head.
+
+```
+//res.body
+
+  {
+    wordId,
+    mValue: Number,
+    foreignLanguage: String
+  }
+
+```
+
+##### POST ```api/learn/
+
+Processes User answer and returns the results of their guess.
+
+```
+//req.body
+  
+  {
+    subjectId,
+    foreignLanguage: String,
+    userAnswer: String
+  }
+
+  //res.body
+
+  {
+    correct: Boolean,
+    mValue: String,
+    foreignLanguage: String,
+    nativeLanguage: String,
+    userAnswer: String
+  }
+
+```
+
+
+##### GET ```api/subjects```
+
+Gets all available subjects.
+
+```
+//res.body
+[
+  {
+    subjectId,
+    subject: String
+  }
+]
+
+
+```
+
+##### GET ```api/subjects/userSubjects```
+
+Uses req.user to get list of user's subjects from user object in database
+
+```
+//res.body
+[
+  {
+    subjectId,
+    subject: String
+  }
+]
+
+
+```
+
+##### POST ```api/subjects/:subjectId```
+
+Server creates subject lists per user as needed, so if user wants to study a new subject, this route will create that user list.
+
+```
+//res.body
+{
+status:204
+}
+```
+
+
 
 
 ##### GET ```api/score/:subjectId```
 
-Finds list per userId and subjectId and returns all of the memory scores for the words in that list
+Finds list per userId and subjectId and returns all of the memory scores for the words in that list.
 
+```
+//res.body
+[
+  {
+    foreignLanguage: String,
+    mValue: Number
+  },
+  {
+  ...
+  },
+  {
+  ...
+  },
+]
+
+
+```
 
 ##### POST ```api/users```
 
+Creates a new user.
+
 ```
+//req.body
 {
-  fullname //optional
-  username
-  password
-  subjectId //from dropdown
+  fullname: String, //optional
+  username: String,
+  password: String,
+  subjectId: String //from dropdown
+}
+
+// res.body
+{
+  authToken: String
 }
 
 ```
 
 ##### POST ```api/auth/login```
 
+Login route.
+
 ```
+// req.body
 {
-  username
-  password
+  username: String,
+  password: String
+}
+
+// res.body
+{
+  authToken: String
 }
 
 ```
 
 ##### POST ```api/auth/refresh```
 
+Periodic refresh Route.
+
 ```
+// req.header
+Authorization: Bearer ${token}
+
+// res.body
 {
-  username
+  authToken: String
 }
 
 ```

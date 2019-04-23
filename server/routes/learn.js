@@ -39,8 +39,6 @@ router.post('/', (req, res, next) => {
     subjectId,
     foreignLanguage,
     userAnswer,
-    _id,
-    mValue,
   } = req.body;
 
   let correct;
