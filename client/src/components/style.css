@@ -17,6 +17,15 @@ main{
   color: red;
 }
 
+.login-form p{
+  padding: 0;
+  margin: 0;
+}
+.login-form p.login-example{
+  margin: 5px 0;
+  font-weight: bolder;
+}
+
 .german-title{
   /* background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
   background: -o-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -o-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
