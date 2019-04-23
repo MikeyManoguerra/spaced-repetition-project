@@ -23,7 +23,7 @@ Redux Router
 
 ### API Documentation
 
-##### GET ```api/learn/:subjectId
+##### GET ```api/learn/:subjectId```
 
 Finds user's list by subjectId and returns the word the current word on that list, the list head.
 
@@ -38,7 +38,7 @@ Finds user's list by subjectId and returns the word the current word on that lis
 
 ```
 
-##### POST ```api/learn/
+##### POST ```api/learn/```
 
 Processes User answer and returns the results of their guess.
 
