@@ -31,8 +31,8 @@ const newWords = [
 
   },
   {
-    'foreignLanguage': 'další, prosím',
-    'nativeLanguage': 'drugi, molim',
+    'foreignLanguage': 'drugi, molim',
+    'nativeLanguage': 'another, please',
     'pointer': 7
 
   },
@@ -98,8 +98,8 @@ const newWords = [
     'pointer': 19
   },
   {
-    'foreignLanguage': 'Jste svobodný',
-    'nativeLanguage': 'jesi li slobodan?',
+    'foreignLanguage': 'jesi li slobodan?',
+    'nativeLanguage': 'are you single?',
     'pointer': null
   }
 
