@@ -120,13 +120,7 @@ Finds list per userId and subjectId and returns all of the memory scores for the
   {
     foreignLanguage: String,
     mValue: Number
-  },
-  {
-  ...
-  },
-  {
-  ...
-  },
+  }
 ]
 
 
