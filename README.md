@@ -21,6 +21,26 @@ Redux
 Redux Form
 Redux Router
 
+### API Documentation
+
+POST ```api/auth/login```
+
+```
+{
+  username
+  password
+}
+
+```
+
+POST ```api/auth/refresh```
+
+```
+{
+  username
+}
+
+```
 
 ### Next Steps:
 
