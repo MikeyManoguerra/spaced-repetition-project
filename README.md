@@ -23,7 +23,26 @@ Redux Router
 
 ### API Documentation
 
-POST ```api/auth/login```
+
+
+##### GET ```api/score/:subjectId```
+
+Finds list per userId and subjectId and returns all of the memory scores for the words in that list
+
+
+##### POST ```api/users```
+
+```
+{
+  fullname //optional
+  username
+  password
+  subjectId //from dropdown
+}
+
+```
+
+##### POST ```api/auth/login```
 
 ```
 {
@@ -33,7 +52,7 @@ POST ```api/auth/login```
 
 ```
 
-POST ```api/auth/refresh```
+##### POST ```api/auth/refresh```
 
 ```
 {
