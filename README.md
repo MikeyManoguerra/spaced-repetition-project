@@ -1,7 +1,7 @@
 
 ## App deployed at
 
-[Languages for friday](https://languages-for-friday.netlify.com)
+[Languages for friday](https://www.friday-night-knowledge.netlify.com)
 
 # Friday Night Knowledge
 This is app grew out of a project that implements a spaced repetition algorithm. Version 1.0 was for only the german wordset. This version allows for the code-base to work with any language, and users can have multiple languages they are studying. A small script can add a new language (or any subject, for that matter), to the potential subject list. It also should not be too hard to add new words to each subject, and update the user's lists accordingly, either all at once, or as needed.
