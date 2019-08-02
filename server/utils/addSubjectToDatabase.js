@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const Word = require('../models/word');
 const Subject = require('../models/subject');
 
-// const { newWords, subjects } =require('../db/croatian.js')
+// const { newWords, subjects } =require('../db/hungarian.js')
 
 
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex: true })
