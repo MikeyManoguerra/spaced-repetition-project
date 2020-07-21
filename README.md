@@ -5,9 +5,7 @@ This version allows for the code-base to work with any language, and users can h
 
 It also should not be too hard to add new words to each subject, and update the user's lists accordingly, either all at once, or as needed.
 
-## App deployed at
-
-[Languages for friday](https://www.friday-night-knowledge.netlify.com)
+## App deployed at [Languages for friday](https://www.friday-night-knowledge.netlify.com)
 
 ![image](https://res.cloudinary.com/dgzjr8afn/image/upload/v1556028325/friday-new.png)
 
